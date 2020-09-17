@@ -1,0 +1,56 @@
+﻿<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=c42f177a-bbcf-4377-b337-83fae5325dff" type="text/javascript"></script>
+<style type="text/css">
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    #map {
+        height: 1000px;
+        width: 1000px;
+    }
+</style>
+<script>
+    var geoMap;
+
+    ymaps.ready(init);
+    function init() {
+        geoMap = new ymaps.Map('map', {
+            center: [53.31, 28.02], // Москва
+            zoom: 8
+        }, {
+            //searchControlProvider: 'yandex#search'
+        });
+
+        //Loading markers from controller
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("ReturnMarks", "Map")',
+            accept: 'application/json',
+            success: function (markers) {
+                // and setting markers to map
+                if (geoMap) {
+                    for (let marker of markers) {
+                        geoMap.geoObjects.add(
+                            new ymaps.Placemark([marker.x, marker.y], {
+                                balloonContent: marker.balloonContent,
+                                iconContent: marker.iconContent
+                            }, {
+                                preset: marker.preset,
+                                balloonCloseButton: marker.balloonCloseButton,
+                                hideIconOnBalloonOpen: marker.hideIconOnBalloonOpen
+                            })
+                        );
+                    }
+                } else {
+                    throw "Map is not defined";
+                }
+            }
+        });
+    }
+</script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+<div>Map</div>
+<button type="button" class="btn btn-primary" onclick="testFunction()">
+    @ViewBag.Items
+</button>
+<div id="map"></div>

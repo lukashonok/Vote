@@ -28,13 +28,6 @@ namespace Vote.Controllers
             return View();
         }
 
-        public IActionResult Map()
-        {
-            ViewData["mapKey"] = "123";
-            
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

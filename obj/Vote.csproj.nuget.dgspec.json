@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/home/vlad/D/Programming/asp/Vote/Vote.csproj": {}
+    "C:\\Users\\Vlad\\source\\repos\\Vote\\Vote\\Vote.csproj": {}
   },
   "projects": {
-    "/home/vlad/D/Programming/asp/Vote/Vote.csproj": {
+    "C:\\Users\\Vlad\\source\\repos\\Vote\\Vote\\Vote.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/vlad/D/Programming/asp/Vote/Vote.csproj",
+        "projectUniqueName": "C:\\Users\\Vlad\\source\\repos\\Vote\\Vote\\Vote.csproj",
         "projectName": "Vote",
-        "projectPath": "/home/vlad/D/Programming/asp/Vote/Vote.csproj",
-        "packagesPath": "/home/vlad/.nuget/packages/",
-        "outputPath": "/home/vlad/D/Programming/asp/Vote/obj/",
+        "projectPath": "C:\\Users\\Vlad\\source\\repos\\Vote\\Vote\\Vote.csproj",
+        "packagesPath": "C:\\Users\\Vlad\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Vlad\\source\\repos\\Vote\\Vote\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/vlad/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Vlad\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -36,25 +38,45 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Google.Apis.Auth": {
+              "target": "Package",
+              "version": "[1.49.0, )"
+            },
+            "Google.Apis.Core": {
+              "target": "Package",
+              "version": "[1.49.0, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.9.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Google": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.7, )"
+              "version": "[3.1.8, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.7, )"
+              "version": "[3.1.8, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[3.1.7, )"
+              "version": "[3.1.8, )"
             },
-            "Microsoft.EntityFrameworkCore.Sqlite": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[3.1.7, )"
+              "version": "[3.1.8, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
-              "version": "[3.1.7, )"
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.4, )"
             }
           },
           "imports": [
@@ -75,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.401/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
