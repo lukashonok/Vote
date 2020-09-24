@@ -192,3 +192,4 @@ C:\Users\Vlad\source\repos\Vote\Vote\obj\Debug\netcoreapp3.1\Razor\Views\Map\Ind
 C:\Users\Vlad\source\repos\Vote\Vote\obj\Debug\netcoreapp3.1\Razor\Views\Vote\Index.cshtml.g.cs
 C:\Users\Vlad\source\repos\Vote\Vote\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\ResetPassword.cshtml.g.cs
 C:\Users\Vlad\source\repos\Vote\Vote\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
+C:\Users\Vlad\source\repos\Vote\Vote\obj\Debug\netcoreapp3.1\Razor\Views\Vote\VoteSuccess.cshtml.g.cs

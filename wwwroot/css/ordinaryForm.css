@@ -19,13 +19,18 @@
 .form__field {
     width: 100%;
     text-align: center;
-    margin-bottom: 15px; 
+}
+
+.form__error {
+    color: salmon;
 }
 
 .form__field input,
 .form__field textarea,
 .form__field select {
     width: 100%;
+    padding: 0 0 3px 5px;
+    margin-bottom: 15px;
 }
 
 .form__field:last-child {

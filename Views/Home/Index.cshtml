@@ -1,27 +1,10 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model Vote.Forms.VoteForm
 <link rel="stylesheet" href="~/css/ordinaryForm.css">
 <div class="form__container">
     <div class="form">
         <div class="form__title"></div>
-        <form asp-controller="">
-            <div class="form__fields">
-                <div class="form__field">
-                    <input type="text" name="phone" placeholder="Ваш Номер">
-                </div>
-                <div class="form__field">
-                    <select name="select">
-                        <option value="1">Минск</option>
-                        <option value="2">Не Минск</option>
-                    </select>
-                </div>
-                <div class="form__field">
-                    <textarea name="wished" id="" rows="3">
-
-                    </textarea>
-                </div>
-            </div>
+        <form asp-controller="Vote" asp-action="Create" method="post">
+            
         </form>
     </div>
 </div>

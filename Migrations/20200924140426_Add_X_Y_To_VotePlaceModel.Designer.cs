@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vote.Data;
 
 namespace Vote.Migrations
 {
     [DbContext(typeof(VoteContext))]
-    partial class VoteContextModelSnapshot : ModelSnapshot
+    [Migration("20200924140426_Add_X_Y_To_VotePlaceModel")]
+    partial class Add_X_Y_To_VotePlaceModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

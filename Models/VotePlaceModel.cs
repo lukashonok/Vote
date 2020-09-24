@@ -10,6 +10,8 @@ namespace Vote.Models
     {
         [Key]
         public int Id { get; set; }
+        public float x { get; set; }
+        public float y { get; set; }
         public string Region { get; set; }
         public string Town { get; set; }
         public string Street { get; set; }

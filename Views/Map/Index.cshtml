@@ -1,12 +1,5 @@
 ﻿<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=c42f177a-bbcf-4377-b337-83fae5325dff" type="text/javascript"></script>
-<style type="text/css">
-    /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-    #map {
-        height: 1000px;
-        width: 1000px;
-    }
-</style>
+<link href="~/css/map.css" rel="stylesheet" />
 <script>
     var geoMap;
 
@@ -31,11 +24,11 @@
                         geoMap.geoObjects.add(
                             new ymaps.Placemark([marker.x, marker.y], {
                                 balloonContent: marker.balloonContent,
-                                iconContent: marker.iconContent
+                                iconContent: marker.iconContent,
                             }, {
                                 preset: marker.preset,
                                 balloonCloseButton: marker.balloonCloseButton,
-                                hideIconOnBalloonOpen: marker.hideIconOnBalloonOpen
+                                hideIconOnBalloonOpen: marker.hideIconOnBalloonOpen,
                             })
                         );
                     }
@@ -49,8 +42,4 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
-<div>Map</div>
-<button type="button" class="btn btn-primary" onclick="testFunction()">
-    @ViewBag.Items
-</button>
 <div id="map"></div>

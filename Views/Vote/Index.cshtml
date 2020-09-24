@@ -1,4 +1,101 @@
-﻿@{
+﻿@model Vote.Forms.VoteForm
+
+<link rel="stylesheet" href="~/css/ordinaryForm.css">
+<div class="form__container">
+    <div class="form">
+        <div class="form__title"></div>
+        <form asp-controller="Vote" asp-action="Index" method="post">
+            <div class="form__fields">
+                <span class="form__error" asp-validation-for="PhoneNumber"></span>
+                <div class="form__field">
+                    <label asp-for="PhoneNumber"></label>
+                    <input asp-for="PhoneNumber" type="text" id="phone" placeholder="Ваш Номер">
+                </div>
+                <label asp-for="Place"></label>
+                <div class="form__field">
+                    <select id="select-region" asp-items="@ViewBag.Places"></select>
+                </div>
+                <div class="form__field">
+                    <select id="select-town"></select>
+                </div>
+                <div class="form__field">
+                    <select id="select-street"></select>
+                </div>
+                <div class="form__field">
+                    <select id="select-house" asp-for="Place"></select>
+                </div>
+                <label asp-for="Target"></label>
+                <div class="form__field">
+                    <select id="select-region" asp-for="Target" asp-items="@ViewBag.Targets"></select>
+                </div>
+            </div>
+            <div class="form__submit">
+                <button type="submit">Vote</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let select_items = [
+        {
+            "field": "Region",
+            "item": document.getElementById("select-region"),
+            "status": true,
+        },
+        {
+            "field": "Town",
+            "item": document.getElementById("select-town"),
+            "status": false,
+        },
+        {
+            "field": "Street",
+            "item": document.getElementById("select-street"),
+            "status": false,
+        },
+        {
+            "field": "House",
+            "item": document.getElementById("select-house"),
+            "status": false,
+        }
+    ]
+    for (let select of select_items) {
+        select.status ? "block" : "none";
+        select.item.onchange = (selected) => {
+            let text = selected.target.options[selected.target.selectedIndex].text;
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetVotePlacesForSelect", "Vote")',
+                accept: 'application/json',
+                data: {
+                    "field": select.field,
+                    "text": text
+                },
+                success: function (places) {
+                    if (select_items[select_items.indexOf(select) + 1]) {
+                        select_items[select_items.indexOf(select) + 1].status = true;
+                        select_items[select_items.indexOf(select) + 1].item.innerHTML = '';
+                        for (let place of places) {
+                            let opt = document.createElement('option');
+                            opt.value = place.value;
+                            opt.innerHTML = place.text;
+                            select_items[select_items.indexOf(select) + 1].item.appendChild(opt);
+                        }
+                        for (let select_inner of select_items) {
+                            select_inner.item.style.display = select_inner.status ? "block" : "none";
+                        }
+                        select_items[select_items.indexOf(select) + 1].item.dispatchEvent(new Event("change"));
+                    }
+                }
+            });
+        }
+    }
+    select_items[0].item.dispatchEvent(new Event("change"));
+</script>
+
+@section scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/localization/ru.messages.js"></script>
 }
 
-<div>Vote index</div>
+<script src="~/js/site.js" asp-append-version="true"></script>
