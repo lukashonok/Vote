@@ -1,0 +1,76 @@
+﻿@model Vote.Forms.EvidenceForm
+<link href="~/css/placeDetail.css" rel="stylesheet" />
+<h1>Информация о месте голосования</h1>
+<div class="place-detail__container">
+    <div class="place-detail__info">
+        @await Component.InvokeAsync("PlaceInfo", new { id = ViewBag.Id, showDetail=false})
+    </div>
+    <div class="place-detail__create-evidence">
+        @if (ViewBag.isAuthenticated)
+        {
+            <form asp-controller="Map" asp-action="PlaceDetail" method="post" enctype="multipart/form-data">
+                <div class="create-evidence__title">
+                    Есть какая-либо компрометирующая информация?
+                </div>
+                <div class="create-evidence__text">
+                    <label asp-for="Comment"></label>
+                    <textarea asp-for="Comment" name="Comment">
+                    </textarea>
+                </div>
+                <div class="create-evidence__files">
+                    <input asp-for="File1" name="File1" type="file" class="evidence__files" />
+                    <input asp-for="File2" name="File2" type="file" class="evidence__files" />
+                    <input asp-for="File3" name="File3" type="file" class="evidence__files" />
+                </div>
+                <input asp-for="PlaceId" name="PlaceId" type="hidden" />
+                <input type="submit" value="Отправить" />
+            </form>
+        } else
+        {
+            <div>
+                <a href="/Identity/Account/Login">Войдите</a>, чтобы можно было оставлять компрометирующую информацию
+            </div>
+        }
+    </div>
+    @if (@ViewBag.evidences != null && @ViewBag.evidences?.Count != 0)
+    {
+        <div class="place-detail__title">
+
+        </div>
+        <div class="place-detail__evidences">
+            <div class="evidences__container">
+                @foreach (var item in @ViewBag.evidences)
+                {
+                <div class="evidence">
+                    <div class="evidence__index">
+                        @item.index
+                    </div>
+                    <div class="evidence__user">
+                        @item.Email
+                    </div>
+                    <div class="evidence__comment">
+                        <div class="evidence__title">Комментарий</div>
+                        @item.Evidence.Comment
+                    </div>
+                    @if (item.Files != null)
+                    {
+                <div class="evidence__files">
+                    <div class="evidence__title">Прикреплённые файлы</div>
+                    @foreach (var file in item.Files)
+                    {
+                        @if (file != null)
+                        {
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(file.File)" />
+                        }
+                    }
+                </div>
+                    }
+                    <div class="evidence__date">
+
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    }
+</div>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -14,14 +15,14 @@ namespace Vote.Forms
     {
         [Required]
         [Phone]
-        [Display( Name = "Ваш телефон")]
+        [Display( Name = "Ваш номер телефона")]
         public string PhoneNumber { get; set; }
 
         [Required]
         [Display(Name = "Кандидат")]
         public string Target { get; set; }
 
-        [Display(Name = "Место голосования (дом)")]
+        [Display(Name = "Место голосования")]
         public string Place { get; set; }
         public List<SelectListItem> Targets { get; set; }
 

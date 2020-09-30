@@ -1,0 +1,29 @@
+﻿@model List<Vote.Areas.AdminPanel.Forms.AdminPanelUser>
+
+<form action="/AdminPanel/Admin/Users"  method="post">
+    <input type="submit" name="sbmt" value="Change Everybody" />
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>EmailConfirmed</th>
+            <th>Phone</th>
+            <th>AccessFailedCount</th>
+            <th>Actions</th>
+        </tr>
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <tr>
+                <td><input asp-for="@Model[i].Id" type="hidden" value="@Model[i].Id" name="email" />@Model[i].Id</td>
+                <td><input asp-for="@Model[i].Email" type="text" name="email" /></td>
+                <td><input asp-for="@Model[i].EmailConfirmed" type="checkbox" name="emailConfirmed"/></td>
+                <td><input asp-for="@Model[i].Phone" type="text" name="phoneNumber"/></td>
+                <td><input asp-for="@Model[i].AccessFailedCount" type="hidden" name="email" />@Model[i].AccessFailedCount</td>
+                <td>
+                    <a href="#">Delete</a>
+                    <a href="#">Edit</a>
+                </td>
+            </tr>
+        }
+    </table>
+</form>

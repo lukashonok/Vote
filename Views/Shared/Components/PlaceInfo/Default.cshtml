@@ -1,0 +1,26 @@
+﻿<div class="info__title">
+    Общая информация
+</div>
+<div class="info__property info__property_main">
+    Проголосовало: @ViewBag.TotalVotes
+</div>
+<div class="info__property info__property_main">
+    Компрометирующих доказательств: @ViewBag.TotalEvidences
+</div>
+<div class="info__property">
+    Область: @ViewBag.Region
+</div>
+<div class="info__property">
+    Город: @ViewBag.Town
+</div>
+<div class="info__property">
+    Улица: @ViewBag.Street
+</div>
+<div class="info__property">
+    Номер дома: @ViewBag.House
+</div>
+
+@if (ViewBag.showDetail)
+{
+    <a href=\"{@Url.Action("PlaceDetail", "Map" , new {@ViewBag.Id})}\">Подробнее</a>
+}

@@ -21,21 +21,15 @@ namespace Vote.Services
             {
                 HtmlBody = $"<div style=\"color: purple;\">{message}</div>",
             }.ToMessageBody();
-            //emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
-            //{
-            //    Text = message,
-            //};
 
-            using (var client = new SmtpClient())
-            {
-                await client.ConnectAsync("smtp.gmail.com", 25, false);
+            using var client = new SmtpClient();
+            await client.ConnectAsync("smtp.gmail.com", 25, false);
 
-                await client.AuthenticateAsync("aspvote@gmail.com", "147896325xXx");
+            await client.AuthenticateAsync("aspvote@gmail.com", "147896325xXx");
 
-                await client.SendAsync(emailMessage);
+            await client.SendAsync(emailMessage);
 
-                await client.DisconnectAsync(true);
-            }
+            await client.DisconnectAsync(true);
         }
     }
 }

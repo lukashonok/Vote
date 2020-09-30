@@ -21,12 +21,14 @@ namespace Vote.Areas.Identity
                     options.UseSqlServer(
                 context.Configuration.GetConnectionString("VoteContextConnection")));
 
-                services.AddDefaultIdentity<ApplicationUser>(options =>
+                services.AddIdentity<ApplicationUser, IdentityRole>(options =>
                 {
                     options.SignIn.RequireConfirmedAccount = false;
                     options.SignIn.RequireConfirmedEmail = true;
-                }
-                ).AddEntityFrameworkStores<VoteContext>();
+                })
+                .AddEntityFrameworkStores<VoteContext>()
+                .AddRoles<IdentityRole>()
+                .AddDefaultTokenProviders();
             });
         }
     }

@@ -12,6 +12,8 @@ using Vote.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Vote.Areas.Identity.Data;
+using Vote.Services;
 
 namespace Vote
 {
@@ -33,12 +35,14 @@ namespace Vote
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddTransient<IViewRenderService, ViewRenderService>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -47,8 +51,7 @@ namespace Vote
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseExceptionHandler("/Vote/Error");
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
@@ -59,13 +62,59 @@ namespace Vote
             app.UseAuthentication();
             app.UseAuthorization();
 
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Vote}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute(
+                    name: "AdminPanel",
+                    areaName: "AdminPanel",
+                    pattern: "{area}/{controller=Admin}/{action=Index}");
                 endpoints.MapRazorPages();
             });
+
+            CreateRoles(serviceProvider);
+        }
+
+        private void CreateRoles(IServiceProvider serviceProvider)
+        {
+            const string ADMIN = "Admin";
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            Task<IdentityResult> roleResult;
+            string email = "vladlykashonok@gmail.com";
+
+            Task<bool> hasAdminRole = roleManager.RoleExistsAsync(ADMIN);
+            hasAdminRole.Wait();
+
+            if (!hasAdminRole.Result)
+            {
+                roleResult = roleManager.CreateAsync(new IdentityRole(ADMIN));
+                roleResult.Wait();
+            }
+
+            Task<ApplicationUser> adminUser = userManager.FindByEmailAsync(email);
+            adminUser.Wait();
+
+            if (adminUser.Result == null)
+            {
+                ApplicationUser administrator = new ApplicationUser
+                {
+                    Email = email,
+                    UserName = email
+                };
+
+                Task<IdentityResult> newUser = userManager.CreateAsync(administrator, "147896325xXx.");
+                newUser.Wait();
+
+                if (newUser.Result.Succeeded)
+                {
+                    Task<IdentityResult> newUserRole = userManager.AddToRoleAsync(administrator, ADMIN);
+                    newUserRole.Wait();
+                }
+            }
         }
     }
 }

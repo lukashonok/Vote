@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Google.Apis.Logging;
@@ -33,7 +34,6 @@ namespace Vote.Controllers
             ViewBag.Places = places;
             ViewBag.Targets = targets;
 
-            _logger.LogInformation("Index");
             var voteForm = new VoteForm();
 
             return View(voteForm);
@@ -43,45 +43,40 @@ namespace Vote.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Index(VoteForm voteForm)
         {
-            //try
-            //{
-                if (ModelState.IsValid)
-                {
-                    TargetModel target = await _context.Target.FindAsync(Convert.ToInt32(voteForm.Target));
-                    VotePlaceModel place = await _context.VotePlace.FindAsync(Convert.ToInt32(voteForm.Place));
-                    _context.Vote.Add(
-                        new VoteModel()
-                        {
-                            CreatedAt = DateTime.Now,
-                            TargetId = target,
-                            VotePlaceId = place,
-                            PhoneNumber = voteForm.PhoneNumber
-                        }
-                    );
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(VoteSuccess));
-                } else
-                {
-                    return await Index();
-                }
-            //}
-            //catch (Exception)
-            //{
-            //    throw new Exception("Something went wrong");
-            //    //return await Index();
-            //}
+            if (ModelState.IsValid)
+            {
+                TargetModel target = await _context.Target.FindAsync(Convert.ToInt32(voteForm.Target));
+                VotePlaceModel place = await _context.VotePlace.FindAsync(Convert.ToInt32(voteForm.Place));
+                _context.Vote.Add(
+                    new VoteModel()
+                    {
+                        CreatedAt = DateTime.Now,
+                        TargetId = target,
+                        VotePlaceId = place,
+                        PhoneNumber = voteForm.PhoneNumber
+                    }
+                );
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(VoteSuccess));
+            } else
+            {
+                return await Index();
+            }
         }
 
         public ActionResult VoteSuccess()
         {
-            _logger.LogInformation("VoteSuccess");
+            return View();
+        }
+        public IActionResult Privacy()
+        {
             return View();
         }
 
-
-        public ActionResult Details(int id)
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
         {
-            return View();
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         // POST: VoteController/Create
@@ -98,49 +93,6 @@ namespace Vote.Controllers
                 return View();
             }
         }
-
-        // GET: VoteController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: VoteController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: VoteController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: VoteController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         public async Task<SelectList> GetVotePlacesForSelect(string field, string text = null)
         {
             List<VotePlaceModel> places_raw = new List<VotePlaceModel>();

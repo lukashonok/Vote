@@ -13,6 +13,6 @@ namespace Vote.Models
         public int Id { get; set; }
         [ForeignKey("CompromisingEvidence")]
         public CompromisingEvidenceModel CompromisingEvidenceId { get; set; }
-        public string File { get; set; }
+        public byte[] File { get; set; }
     }
 }

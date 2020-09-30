@@ -17,5 +17,7 @@ namespace Vote.Models
         [ForeignKey("ApplicationUser")]
         public ApplicationUser UserId { get; set; }
         public string Comment { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime CreatedAt { get; set; }
     }
 }

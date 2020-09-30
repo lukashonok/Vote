@@ -1,14 +1,15 @@
 ﻿@model Vote.Forms.VoteForm
 
 <link rel="stylesheet" href="~/css/ordinaryForm.css">
+<link href="~/css/site.css" rel="stylesheet" />
 <div class="form__container">
     <div class="form">
         <div class="form__title"></div>
         <form asp-controller="Vote" asp-action="Index" method="post">
             <div class="form__fields">
                 <span class="form__error" asp-validation-for="PhoneNumber"></span>
+                <label asp-for="PhoneNumber"></label>
                 <div class="form__field">
-                    <label asp-for="PhoneNumber"></label>
                     <input asp-for="PhoneNumber" type="text" id="phone" placeholder="Ваш Номер">
                 </div>
                 <label asp-for="Place"></label>
@@ -30,7 +31,7 @@
                 </div>
             </div>
             <div class="form__submit">
-                <button type="submit">Vote</button>
+                <button class="nice-button" type="submit">Vote</button>
             </div>
         </form>
     </div>
@@ -60,7 +61,7 @@
         }
     ]
     for (let select of select_items) {
-        select.status ? "block" : "none";
+        select.item.style.display = select.status ? "block" : "none";
         select.item.onchange = (selected) => {
             let text = selected.target.options[selected.target.selectedIndex].text;
             $.ajax({
