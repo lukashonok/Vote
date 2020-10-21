@@ -294,13 +294,16 @@ namespace Vote.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PhoneNumber")
+                    b.Property<string>("PhoneNumberq")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Target")
                         .HasColumnType("int");
 
                     b.Property<int?>("VotePlace")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("VoteProcess")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -310,6 +313,8 @@ namespace Vote.Migrations
                     b.HasIndex("Target");
 
                     b.HasIndex("VotePlace");
+
+                    b.HasIndex("VoteProcess");
 
                     b.ToTable("Vote");
                 });
@@ -345,6 +350,27 @@ namespace Vote.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("VotePlace");
+                });
+
+            modelBuilder.Entity("Vote.Models.VoteProcessModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EndAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("showResults")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VoteProcess");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -429,6 +455,10 @@ namespace Vote.Migrations
                     b.HasOne("Vote.Models.VotePlaceModel", "VotePlaceId")
                         .WithMany()
                         .HasForeignKey("VotePlace");
+
+                    b.HasOne("Vote.Models.VoteProcessModel", "VoteProcessId")
+                        .WithMany()
+                        .HasForeignKey("VoteProcess");
                 });
 #pragma warning restore 612, 618
         }

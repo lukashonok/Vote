@@ -1,0 +1,58 @@
+﻿@model Vote.Areas.AdminPanel.Forms.UserForm
+<link href="~/css/placeDetail.css" rel="stylesheet" />
+<h1>Detail</h1>
+<div class="user-detail__container">
+    <div class="user-detail__info">
+        <div>
+            @Model.User.Id
+            @Model.User.Email
+            @Model.User.EmailConfirmed
+            @Model.User.PhoneNumber
+            @Model.User.AccessFailedCount
+        </div>
+    </div>
+    <div class="user-detail__evidences">
+        @if (Model.Evidences!= null && Model.Evidences?.Count != 0)
+        {
+            <div class="place-detail__title">
+
+            </div>
+            <div class="place-detail__evidences">
+                <div class="evidences__container">
+                    @foreach (var item in Model.Evidences)
+                    {
+                    <div class="evidence">
+                        <div class="evidence__index">
+                            @item.index
+                        </div>
+                        <div class="evidence__user">
+                            @item.Email
+                        </div>
+                        <div class="evidence__comment">
+                            <div class="evidence__title">Комментарий</div>
+                            @item.Evidence.Comment
+                        </div>
+                        @if (item.Files != null && item.Files.Count() != 0)
+                        {
+                            <div class="evidence__files">
+                                <div class="evidence__title">Прикреплённые файлы</div>
+                                @foreach (var file in item.Files)
+                                {
+                                    @if (file != null)
+                                    {
+                                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(file.File)" />
+                                    }
+                                }
+                            </div>
+                        }
+                        <div class="evidence__place">
+                            <div class="evidence__title">Место голосования</div>
+                            @await Component.InvokeAsync("PlaceInfo", new { id = item.Evidence.VotePlaceId.Id, showDetail = true })
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>

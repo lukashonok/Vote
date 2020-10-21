@@ -30,6 +30,6 @@ namespace Vote.Data
         public DbSet<TargetModel> Target { get; set; }
         public DbSet<CompromisingEvidenceModel> CompromisingEvidence { get; set; }
         public DbSet<CompromisingEvidenceFileModel> CompromisingEvidenceFile { get; set; }
-
+        public DbSet<VoteProcessModel> VoteProcess { get; set; }
     }
 }

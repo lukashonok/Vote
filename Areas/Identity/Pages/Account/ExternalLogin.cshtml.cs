@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Vote.Areas.Identity.Data;
+using Vote.Services;
 
 namespace Vote.Areas.Identity.Pages.Account
 {
@@ -28,13 +29,14 @@ namespace Vote.Areas.Identity.Pages.Account
         public ExternalLoginModel(
             SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager,
-            ILogger<ExternalLoginModel> logger,
-            IEmailSender emailSender)
+            ILogger<ExternalLoginModel> logger
+            //IEmailSender emailSender
+            )
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _logger = logger;
-            _emailSender = emailSender;
+            _emailSender = new EmailService();
         }
 
         [BindProperty]

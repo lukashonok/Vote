@@ -15,8 +15,10 @@ namespace Vote.Models
         public ApplicationUser UserId { get; set; }
         [ForeignKey("Target")]
         public TargetModel TargetId { get; set; }
+        [ForeignKey("VoteProcess")]
+        public VoteProcessModel VoteProcessId { get; set; }
         [DataType(DataType.PhoneNumber)]
-        public string PhoneNumber { get; set; }
+        public string PhoneNumberq { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime CreatedAt { get; set; }

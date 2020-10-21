@@ -1,29 +1,34 @@
 ﻿@model List<Vote.Areas.AdminPanel.Forms.AdminPanelUser>
 
-<form action="/AdminPanel/Admin/Users"  method="post">
-    <input type="submit" name="sbmt" value="Change Everybody" />
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Email</th>
-            <th>EmailConfirmed</th>
-            <th>Phone</th>
-            <th>AccessFailedCount</th>
-            <th>Actions</th>
+    <link href="~/css/users.css" rel="stylesheet" />
+<table class="users__table">
+    <tr class="table__header">
+        <th class="prop__title">Почта</th>
+        <th class="prop__title">Подтверждённый аккаунт</th>
+        <th class="prop__title">Телефон</th>
+        <th class="prop__title">Попытки </th>
+        <th class="prop__title">Id</th>
+        <th class="prop__title">Действия</th>
+    </tr>
+    @for (int i = 0; i < Model.Count(); i++)
+    {
+        <tr class="table__user">
+            <td class="prop"><a href=@Url.Action("UserDetail", "Admin", new { Id = Model[i].Id })>@Model[i].Email</a></td>
+            <td class="prop">@Model[i].EmailConfirmed</td>
+            <td class="prop">@Model[i].Phone</td>
+            <td class="prop">@Model[i].AccessFailedCount</td>
+            <td class="prop">@Model[i].Id</td>
+            <td class="prop">
+                <a href=@Url.Action("UserDetail", "Admin", new { Id = Model[i].Id })>Подробнее</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a href=@Url.Action("UserDelete", "Admin", new { Id = Model[i].Id })>Удалить</a><small>|</small>
+                    <a href=@Url.Action("UserRoleSet", "Admin", new { Id = Model[i].Id, Role = "Manager" })>Сделать менеджером</a><small>|</small>
+                    <a href=@Url.Action("UserRoleUnset", "Admin", new { Id = Model[i].Id, Role = "Manager" })>Снять с менеджера</a><small>|</small>
+                    <a href=@Url.Action("UserRoleSet", "Admin", new { Id = Model[i].Id, Role = "Admin" })>Сделать админом</a><small>|</small>
+                    <a href=@Url.Action("UserRoleUnset", "Admin", new { Id = Model[i].Id, Role = "Admin" })>Снять с админа</a><small>|</small>
+                }
+            </td>
         </tr>
-        @for (int i = 0; i < Model.Count(); i++)
-        {
-            <tr>
-                <td><input asp-for="@Model[i].Id" type="hidden" value="@Model[i].Id" name="email" />@Model[i].Id</td>
-                <td><input asp-for="@Model[i].Email" type="text" name="email" /></td>
-                <td><input asp-for="@Model[i].EmailConfirmed" type="checkbox" name="emailConfirmed"/></td>
-                <td><input asp-for="@Model[i].Phone" type="text" name="phoneNumber"/></td>
-                <td><input asp-for="@Model[i].AccessFailedCount" type="hidden" name="email" />@Model[i].AccessFailedCount</td>
-                <td>
-                    <a href="#">Delete</a>
-                    <a href="#">Edit</a>
-                </td>
-            </tr>
-        }
-    </table>
-</form>
+    }
+</table>

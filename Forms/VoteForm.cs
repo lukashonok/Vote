@@ -27,4 +27,17 @@ namespace Vote.Forms
         public List<SelectListItem> Targets { get; set; }
 
     }
+    
+    public class VoteStat
+    {
+        public int Total { get; set; }
+        public List<VotePropsForChart> VoteStats { get; set; }
+    }
+
+    public class VotePropsForChart
+    {
+        public string targetName { get; set; }
+        public int v { get; set; }
+        public string f { get; set; }
+    }
 }

@@ -30,8 +30,9 @@
                         </li>
                         @if (User.IsInRole("Admin"))
                         {
+
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href=@("/AdminPanel"+(Url.Action("Index", "Admin", new { area = "AdminPanel" })))>Панель Администратора</a>
+                                <a class="nav-link text-dark" asp-area="AdminPanel" asp-controller="Admin" asp-action="Index">Панель Администратора</a>
                             </li>
                         }
                     </ul>

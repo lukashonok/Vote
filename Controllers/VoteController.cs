@@ -47,16 +47,19 @@ namespace Vote.Controllers
             {
                 TargetModel target = await _context.Target.FindAsync(Convert.ToInt32(voteForm.Target));
                 VotePlaceModel place = await _context.VotePlace.FindAsync(Convert.ToInt32(voteForm.Place));
+                VoteProcessModel process = await _context.VoteProcess.LastAsync();
                 _context.Vote.Add(
                     new VoteModel()
                     {
                         CreatedAt = DateTime.Now,
                         TargetId = target,
                         VotePlaceId = place,
-                        PhoneNumber = voteForm.PhoneNumber
+                        PhoneNumberq = voteForm.PhoneNumber,
+                        VoteProcessId = process
                     }
                 );
                 await _context.SaveChangesAsync();
+                _logger.LogInformation($"{voteForm.PhoneNumber} voted");
                 return RedirectToAction(nameof(VoteSuccess));
             } else
             {

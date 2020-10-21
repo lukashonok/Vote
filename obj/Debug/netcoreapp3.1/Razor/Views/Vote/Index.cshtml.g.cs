@@ -27,7 +27,7 @@ using Vote.Models;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d61058cd55c85cc770569b3c4472338e9fc884bd", @"/Views/Vote/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c2a6ed8e186cf43737159ab11af8a4e69ccf920d", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b2577c3f8547dd98708bf693a6552124c3998e7d", @"/Views/_ViewImports.cshtml")]
     public class Views_Vote_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Vote.Forms.VoteForm>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("rel", new global::Microsoft.AspNetCore.Html.HtmlString("stylesheet"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);

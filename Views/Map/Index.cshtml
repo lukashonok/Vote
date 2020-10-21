@@ -15,7 +15,7 @@
         //Loading markers from controller
         $.ajax({
             type: 'GET',
-            url: '@Url.Action("ReturnMarks", "Map")',
+            url: '@Url.Action("GetMarks", "Map")',
             accept: 'application/json',
             success: function (markers) {
                 // and setting markers to map
@@ -42,4 +42,65 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
+@section scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Tax Type');
+            data.addColumn('number', 'Tax Percentage');
+
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetVoteStat", "Map")',
+                accept: 'application/json',
+                success: function (voteStat) {
+                    rows = [];
+
+                    for (let row of voteStat.voteStats) {
+                        rows.push(
+                            [row.targetName, { v: row.v, f: row.f }]
+                        );
+                    }
+
+                    data.addRows(rows);
+
+                    var option = {
+                        title: 'Всего проголосовало - ' + voteStat.Total,
+                        width: 500,
+                        height: 400
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('chart'));
+                    chart.draw(data, option);
+                }
+            });
+
+
+
+
+        }
+    </script>
+}
+
 <div id="map"></div>
+
+@if (ViewBag.showResults)
+{
+    <h4>Текущая статистика по голосованию</h4>
+    <div style="width: 100%; align-items: center">
+        <div id="chart"></div>
+    </div>
+}
+else
+{
+    <h4>Текущая статистика по голосованию недоступна до окончания голосования</h4>
+    <h4>Дата окончания голосования: @ViewBag.EndAt</h4>
+}
+
+<div style="width: 100%; align-items: center">
+    <div id="chart"></div>
+</div>

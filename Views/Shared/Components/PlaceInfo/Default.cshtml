@@ -22,5 +22,5 @@
 
 @if (ViewBag.showDetail)
 {
-    <a href=\"{@Url.Action("PlaceDetail", "Map" , new {@ViewBag.Id})}\">Подробнее</a>
+    <a href=@Url.Action("PlaceDetail", "Map" , new {@ViewBag.Id})>Подробнее</a>
 }

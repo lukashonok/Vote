@@ -19,10 +19,12 @@ namespace Vote.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(int id, bool showDetail)
         {
-            VotePlaceModel place = await _context.VotePlace.FindAsync(id);
+            VotePlaceModel place = await (from VP in _context.VotePlace
+                                   where VP.Id == id
+                                   select VP).FirstAsync();
             var evidences_raw = (from E in _context.CompromisingEvidence
                                  where E.VotePlaceId.Id == id
-                                 select E).Include("UserId");
+                                 select E).Include("UserId").Include("VotePlaceId");
             List<CompromisingEvidenceModel> evidences_pre = evidences_raw.ToList();
 
             var TotalVotes = (from V in _context.Vote

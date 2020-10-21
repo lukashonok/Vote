@@ -38,8 +38,11 @@ namespace Vote.Controllers
             _logger = logger;
             _userManager = userManager;
         }
-        public IActionResult Index()
+        public async Task<ActionResult> Index()
         {
+            var voteProcess = (await _context.VoteProcess.ToListAsync()).Last();
+            ViewBag.showResults = voteProcess.showResults;
+            ViewBag.EndAt = voteProcess.EndAt;
             return View();
         }
 
@@ -57,7 +60,6 @@ namespace Vote.Controllers
             foreach (var ev in evidences_pre)
             {
                 //ev.UserId = await _userManager.GetUserAsync(HttpContext.User);
-
                 index++;
                 evidences.Add(
                     new EvidenceEntity()
@@ -141,6 +143,7 @@ namespace Vote.Controllers
                         }
                     }
                 }
+                _logger.LogInformation($"Evidence was created for place with id = {evidenceForm.PlaceId}");
                 await _context.SaveChangesAsync();
             }
 
@@ -148,7 +151,7 @@ namespace Vote.Controllers
         }
 
         [HttpGet]
-        public async Task<List<MapMarker>> ReturnMarks()
+        public async Task<List<MapMarker>> GetMarks()
         {
             //SELECT VotePlace.Id, VotePlace.x, VotePlace.y, Count(VotePlace.Id) as 'Total'
             //FROM Vote INNER JOIN VotePlace on VotePlace.Id = Vote.VotePlace
@@ -162,7 +165,7 @@ namespace Vote.Controllers
 
             List<MapMarker> markers = new List<MapMarker>();
 
-            
+
             foreach (var place in places)
             {
                 var q = ViewComponent("PlaceInfo", new { id = place.Id, showDetail = true });
@@ -173,7 +176,7 @@ namespace Vote.Controllers
                         x = place.x,
                         y = place.y,
                         balloonCloseButton = true,
-                        balloonContent = 
+                        balloonContent =
                             $"<div style=\" text-align: center\"> В этом месте проголоcовало: {place.count}</div><br>" +
                             $"Область: {place.Region}<br>" +
                             $"Город: {place.Town}<br>" +
@@ -187,6 +190,37 @@ namespace Vote.Controllers
             }
 
             return markers;
+        }
+
+        [HttpGet]
+        public async Task<VoteStat> GetVoteStat()
+        {
+            //SELECT Target.Name, Count(Vote.Target) as "Total" 
+            //FROM Target LEFT JOIN  Vote ON Vote.Target = Target.Id 
+            //GROUP BY Vote.Target, Target.Name;
+            var voteStat_raw = (from T in _context.Target
+                              join V in _context.Vote on T.Id equals V.TargetId.Id
+                              group T by new { T.Name, T.Id } into total
+                              select new { total.Key.Name, Count = total.Count() });
+            var totalVotes = await  _context.Vote.CountAsync();
+
+            VoteStat voteStat = new VoteStat()
+            {
+                VoteStats = new List<VotePropsForChart>(),
+                Total = totalVotes
+            };
+
+            var voteStat_pre = await voteStat_raw.ToListAsync();
+            foreach (var vote in voteStat_pre)
+            {
+                voteStat.VoteStats.Add(
+                    new VotePropsForChart {
+                        v = vote.Count,
+                        f = Convert.ToString(vote.Count),
+                        targetName = vote.Name
+                    });
+            }
+            return voteStat;
         }
     }
     public class MapMarker

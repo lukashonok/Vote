@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Vote.Areas.Identity.Data;
 using Vote.Services;
+using System.Security.Policy;
 
 namespace Vote
 {
@@ -32,8 +33,18 @@ namespace Vote
 
             services.AddDbContext<VoteContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(Config.ConnectionString);
             });
+
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    IConfiguration googleAuthentication =
+                        Configuration.GetSection("Authentication:Google");
+                    options.ClientId     = googleAuthentication["ClientId"];
+                    options.ClientSecret = googleAuthentication["ClientSecret"];
+                });
+
 
             services.AddTransient<IViewRenderService, ViewRenderService>();
 
@@ -54,6 +65,9 @@ namespace Vote
                 app.UseExceptionHandler("/Vote/Error");
                 app.UseHsts();
             }
+
+            Configuration.Bind("Project", new Config());
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -71,7 +85,7 @@ namespace Vote
                 endpoints.MapAreaControllerRoute(
                     name: "AdminPanel",
                     areaName: "AdminPanel",
-                    pattern: "{area}/{controller=Admin}/{action=Index}");
+                    pattern: "{controller=Admin}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
 
@@ -81,6 +95,7 @@ namespace Vote
         private void CreateRoles(IServiceProvider serviceProvider)
         {
             const string ADMIN = "Admin";
+            const string MANAGER = "Manager";
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             Task<IdentityResult> roleResult;
@@ -88,10 +103,16 @@ namespace Vote
 
             Task<bool> hasAdminRole = roleManager.RoleExistsAsync(ADMIN);
             hasAdminRole.Wait();
-
+            Task<bool> hasManagerRole = roleManager.RoleExistsAsync(MANAGER);
+            hasManagerRole.Wait();
             if (!hasAdminRole.Result)
             {
                 roleResult = roleManager.CreateAsync(new IdentityRole(ADMIN));
+                roleResult.Wait();
+            }
+            if (!hasManagerRole.Result)
+            {
+                roleResult = roleManager.CreateAsync(new IdentityRole(MANAGER));
                 roleResult.Wait();
             }
 
