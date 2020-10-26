@@ -1,18 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Entities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Repositories;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Vote.Data;
-using Vote.Models;
 
 namespace Vote.ViewComponents
 {
     public class PlaceInfoViewComponent : ViewComponent
     {
-        private readonly VoteContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public PlaceInfoViewComponent(VoteContext context)
+
+        public PlaceInfoViewComponent(ApplicationDbContext context)
         {
             _context = context;
         }

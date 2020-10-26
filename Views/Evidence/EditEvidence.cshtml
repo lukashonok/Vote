@@ -1,0 +1,10 @@
+﻿@model Vote.Forms.EvidenceForm
+
+<link rel="stylesheet" href="~/css/ordinaryForm.css">
+<link href="~/css/site.css" rel="stylesheet" />
+<div class="form__container">
+    <div class="form">
+        <div class="form__title"></div>
+        @await Component.InvokeAsync("EvidenceEdit", new { })
+    </div>
+</div>

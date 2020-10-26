@@ -214,3 +214,13 @@ C:\Users\Vlad\source\repos\Vote\Vote\bin\Debug\netcoreapp3.1\runtimes\win\lib\ne
 C:\Users\Vlad\source\repos\Vote\Vote\obj\Debug\netcoreapp3.1\Vote.csproj.CoreCompileInputs.cache
 C:\Users\Vlad\source\repos\Vote\Vote\obj\Debug\netcoreapp3.1\Vote.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Vlad\source\repos\Vote\Vote\obj\Debug\netcoreapp3.1\Vote.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Vlad\source\repos\Vote\Vote\bin\Debug\netcoreapp3.1\Entities.dll
+C:\Users\Vlad\source\repos\Vote\Vote\bin\Debug\netcoreapp3.1\Repositories.dll
+C:\Users\Vlad\source\repos\Vote\Vote\bin\Debug\netcoreapp3.1\Services.dll
+C:\Users\Vlad\source\repos\Vote\Vote\bin\Debug\netcoreapp3.1\Entities.pdb
+C:\Users\Vlad\source\repos\Vote\Vote\bin\Debug\netcoreapp3.1\Repositories.pdb
+C:\Users\Vlad\source\repos\Vote\Vote\bin\Debug\netcoreapp3.1\Services.pdb
+C:\Users\Vlad\source\repos\Vote\Vote\obj\Debug\netcoreapp3.1\Razor\Views\Evidence\Index.cshtml.g.cs
+C:\Users\Vlad\source\repos\Vote\Vote\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\EvidenceEdit\Default.cshtml.g.cs
+C:\Users\Vlad\source\repos\Vote\Vote\obj\Debug\netcoreapp3.1\Razor\Views\Map\VotePlaces.cshtml.g.cs
+C:\Users\Vlad\source\repos\Vote\Vote\obj\Debug\netcoreapp3.1\Razor\Views\Evidence\EditEvidence.cshtml.g.cs

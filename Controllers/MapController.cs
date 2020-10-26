@@ -2,54 +2,71 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+using Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewComponents;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.JSInterop;
-using Org.BouncyCastle.Asn1.Cms;
-using Org.BouncyCastle.Asn1.X509;
-using Vote.Areas.Identity.Data;
-using Vote.Data;
+using Repositories;
+using Services.CompromisingEvidenceFileModelService;
+using Services.CompromisingEvidenceModelService;
+using Services.TargetModelService;
+using Services.VoteModelService;
+using Services.VotePlaceModelService;
+using Services.VoteProcessModelService;
 using Vote.Forms;
-using Vote.Models;
 using Vote.ViewComponents;
 
 namespace Vote.Controllers
 {
     public class MapController : Controller
     {
-        private readonly VoteContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
+        
         private readonly ILogger<MapController> _logger;
-        public MapController(ILogger<MapController> logger, VoteContext context, UserManager<ApplicationUser> userManager)
+        private readonly IVoteModelService _voteModelService;
+        private readonly ITargetModelService _targetModelService;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IVotePlaceModelService _votePlaceModelService;
+        private readonly IVoteProcessModelService _voteProcessModelService;
+        private readonly ICompromisingEvidenceModelService _compromisingEvidenceModelService;
+        private readonly ICompromisingEvidenceFileModelService _compromisingEvidenceFileModelService;
+        
+        public MapController(
+            ILogger<MapController> logger,
+            IVoteModelService voteModelService,
+            UserManager<ApplicationUser> userManager,
+            IVotePlaceModelService votePlaceModelService,
+            IVoteProcessModelService voteProcessModelService,
+            ICompromisingEvidenceModelService compromisingEvidenceModelService,
+            ICompromisingEvidenceFileModelService compromisingEvidenceFileModelService,
+            ITargetModelService targetModelService)
         {
-            _context = context;
             _logger = logger;
             _userManager = userManager;
+            _voteModelService = voteModelService;
+            _targetModelService = targetModelService;
+            _votePlaceModelService = votePlaceModelService;
+            _voteProcessModelService = voteProcessModelService;
+            _compromisingEvidenceModelService = compromisingEvidenceModelService;
+            _compromisingEvidenceFileModelService = compromisingEvidenceFileModelService;
+
         }
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var voteProcess = (await _context.VoteProcess.ToListAsync()).Last();
-            ViewBag.showResults = voteProcess.showResults;
+            var voteProcess = _voteProcessModelService.GetVoteProcessModels().ToList().Last();
+            ViewBag.ShowResults = voteProcess.ShowResults;
             ViewBag.EndAt = voteProcess.EndAt;
             return View();
         }
 
         public async Task<ActionResult> PlaceDetail(int id)
         {
-            VotePlaceModel place = await _context.VotePlace.FindAsync(id);
-            var evidences_raw = (from E in _context.CompromisingEvidence
+            VotePlaceModel place = _votePlaceModelService.GetVotePlaceModel(id);
+            var evidences_raw = (from E in _compromisingEvidenceModelService.GetCompromisingEvidenceModels()
                                  where E.VotePlaceId.Id == id
                                  select E).Include("UserId");
             List<CompromisingEvidenceModel> evidences_pre = evidences_raw.ToList();
@@ -62,20 +79,20 @@ namespace Vote.Controllers
                 //ev.UserId = await _userManager.GetUserAsync(HttpContext.User);
                 index++;
                 evidences.Add(
-                    new EvidenceEntity()
-                    {
-                        Evidence = ev,
-                        Files = await (
-                            from F in _context.CompromisingEvidenceFile
-                            where F.CompromisingEvidenceId.Id == ev.Id
-                            select F
-                        ).ToListAsync(),
-                        Email = ev.UserId?.Email,
-                        index = index
-                    });
+                new EvidenceEntity()
+                {
+                    Evidence = ev,
+                    Files = await (
+                        from F in _compromisingEvidenceFileModelService.GetCompromisingEvidenceFileModels()
+                        where F.CompromisingEvidenceId.Id == ev.Id
+                        select F
+                    ).ToListAsync(),
+                    Email = ev.UserId?.Email,
+                    index = index
+                });
             }
 
-            var TotalVotes = (from V in _context.Vote
+            var TotalVotes = (from V in _voteModelService.GetVoteModels()
                               where V.VotePlaceId.Id == id
                               select V.TargetId).Count();
 
@@ -99,56 +116,7 @@ namespace Vote.Controllers
             return View(evidenceForm);
         }
 
-        [HttpPost]
-        public async Task<ActionResult> PlaceDetail(EvidenceForm evidenceForm)
-        {
-            if (ModelState.IsValid)
-            {
-                CompromisingEvidenceModel evidence = new CompromisingEvidenceModel()
-                {
-                    Comment = evidenceForm.Comment,
-                    UserId = await _userManager.GetUserAsync(HttpContext.User),
-                    VotePlaceId = await _context.VotePlace.FindAsync(evidenceForm.PlaceId)
-                };
-                _context.CompromisingEvidence.Add(evidence);
-                var files = new List<IFormFile>()
-                {
-                    evidenceForm.File1, evidenceForm.File2, evidenceForm.File3
-                };
-                foreach (var file in files)
-                {
-                    if (file != null)
-                    {
-                        using var memoryStream = new MemoryStream();
-                        if (memoryStream.Length < 10097152)
-                        {
-                            string path = AppDomain.CurrentDomain.BaseDirectory + "UploadedFiles/";
-                            string filename = Path.GetFileName(file.FileName);
-                            if (filename != null)
-                            {
-                                await file.CopyToAsync(memoryStream);
 
-                                var fileToSave = new CompromisingEvidenceFileModel()
-                                {
-                                    File = memoryStream.ToArray(),
-                                    CompromisingEvidenceId = evidence
-                                };
-
-                                _context.CompromisingEvidenceFile.Add(fileToSave);
-                            }
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("File", "The file is too large.");
-                        }
-                    }
-                }
-                _logger.LogInformation($"Evidence was created for place with id = {evidenceForm.PlaceId}");
-                await _context.SaveChangesAsync();
-            }
-
-            return await PlaceDetail(evidenceForm.PlaceId);
-        }
 
         [HttpGet]
         public async Task<List<MapMarker>> GetMarks()
@@ -157,8 +125,8 @@ namespace Vote.Controllers
             //FROM Vote INNER JOIN VotePlace on VotePlace.Id = Vote.VotePlace
             //GROUP BY VotePlace.x, VotePlace.y, VotePlace.Id;
 
-            var places_raw = from V in _context.Vote
-                             join VP in _context.VotePlace on V.VotePlaceId.Id equals VP.Id
+            var places_raw = from V in _voteModelService.GetVoteModels()
+                             join VP in _votePlaceModelService.GetVotePlaceModels() on V.VotePlaceId.Id equals VP.Id
                              group V by new { VP.Id, VP.x, VP.y, VP.Region, VP.Town, VP.Street, VP.House } into total
                              select new { total.Key.Id, total.Key.x, total.Key.y, total.Key.Region, total.Key.Town, total.Key.Street, total.Key.House, count = total.Count() };
             var places = await places_raw.ToListAsync();
@@ -193,16 +161,54 @@ namespace Vote.Controllers
         }
 
         [HttpGet]
-        public async Task<VoteStat> GetVoteStat()
+        public async Task<IActionResult> VotePlaces()
         {
+            PlacesSearch placesSearch = await GetVotePlaces(null);
+
+            return View(placesSearch);
+        }
+        public async Task<PlacesSearch> GetVotePlaces(string searchString)
+        {
+            var places = _votePlaceModelService.GetVotePlaceModels();
+            IQueryable<int> places_id;
+            if (searchString == null)
+            {
+                places_id = (from VP in places select VP.Id);
+            } else
+            {
+                places_id = 
+                    from VP in places 
+                    where
+                        VP.Region.Contains($"{searchString}") ||
+                        VP.Town.Contains($"{searchString}") ||
+                        VP.Street.Contains($"{searchString}") ||
+                        VP.House.Contains($"{searchString}")
+                    select VP.Id;
+            }
+            var totalPlaces = await places_id.CountAsync();
+
+            return new PlacesSearch() { PlacesId = places_id.ToList(), Total = totalPlaces};
+        }
+
+        [HttpGet]
+        public IActionResult GetPlaceInfoViewComponent(int id)
+        {
+            var a = ViewComponent(typeof(PlaceInfoViewComponent), new { id, showDetail = true });
+            return a;
+        }
+
+        [HttpGet]
+        public async Task<VoteStat> GetVoteStat()
+        {   
             //SELECT Target.Name, Count(Vote.Target) as "Total" 
             //FROM Target LEFT JOIN  Vote ON Vote.Target = Target.Id 
             //GROUP BY Vote.Target, Target.Name;
-            var voteStat_raw = (from T in _context.Target
-                              join V in _context.Vote on T.Id equals V.TargetId.Id
-                              group T by new { T.Name, T.Id } into total
-                              select new { total.Key.Name, Count = total.Count() });
-            var totalVotes = await  _context.Vote.CountAsync();
+            var votes = _voteModelService.GetVoteModels();
+            var voteStat_raw = (from T in _targetModelService.GetTargetModels()
+                                join V in votes on T.Id equals V.TargetId.Id
+                                group T by new { T.Name, T.Id } into total
+                                select new { total.Key.Name, Count = total.Count() });
+            var totalVotes = votes.Count();
 
             VoteStat voteStat = new VoteStat()
             {

@@ -19,14 +19,48 @@
             <td class="prop">@Model[i].AccessFailedCount</td>
             <td class="prop">@Model[i].Id</td>
             <td class="prop">
-                <a href=@Url.Action("UserDetail", "Admin", new { Id = Model[i].Id })>Подробнее</a>
-                @if (User.IsInRole("Admin"))
+                <a href=@Url.Action("UserDetail", "Admin", new { Id = Model[i].Id })>Подробнее</a><small>|</small>
+                @if (User.IsInRole("SuperAdmin"))
                 {
                     <a href=@Url.Action("UserDelete", "Admin", new { Id = Model[i].Id })>Удалить</a><small>|</small>
-                    <a href=@Url.Action("UserRoleSet", "Admin", new { Id = Model[i].Id, Role = "Manager" })>Сделать менеджером</a><small>|</small>
-                    <a href=@Url.Action("UserRoleUnset", "Admin", new { Id = Model[i].Id, Role = "Manager" })>Снять с менеджера</a><small>|</small>
-                    <a href=@Url.Action("UserRoleSet", "Admin", new { Id = Model[i].Id, Role = "Admin" })>Сделать админом</a><small>|</small>
-                    <a href=@Url.Action("UserRoleUnset", "Admin", new { Id = Model[i].Id, Role = "Admin" })>Снять с админа</a><small>|</small>
+                    @if (!Model[i].Roles.Contains("Manager"))
+                    {
+                        <a href=@Url.Action("UserRoleSet", "Admin", new { Id = Model[i].Id, Role = "Manager" })>Сделать менеджером</a><small>|</small>
+                    }
+                    else
+                    {
+                        <a href=@Url.Action("UserRoleUnset", "Admin", new { Id = Model[i].Id, Role = "Manager" })>Снять с менеджера</a><small>|</small>
+                    }
+                    @if (!Model[i].Roles.Contains("Admin"))
+                    {
+                        <a href=@Url.Action("UserRoleSet", "Admin", new { Id = Model[i].Id, Role = "Admin" })>Сделать админом</a><small>|</small>
+                    }
+                    else
+                    {
+                        <a href=@Url.Action("UserRoleUnset", "Admin", new { Id = Model[i].Id, Role = "Admin" })>Снять с админа</a><small>|</small>
+                    }
+                }
+                else if (User.IsInRole("Admin"))
+                {
+                    @if (!Model[i].Roles.Contains("SuperAdmin"))
+                    {
+                        @if (!Model[i].Roles.Contains("Manager"))
+                        {
+                            <a href=@Url.Action("UserRoleSet", "Admin", new { Id = Model[i].Id, Role = "Manager" })>Сделать менеджером</a><small>|</small>
+                        }
+                        else
+                        {
+                            <a href=@Url.Action("UserRoleUnset", "Admin", new { Id = Model[i].Id, Role = "Manager" })>Снять с менеджера</a><small>|</small>
+                        }
+                        @if (!Model[i].Roles.Contains("Admin"))
+                        {
+                            <a href=@Url.Action("UserRoleSet", "Admin", new { Id = Model[i].Id, Role = "Admin" })>Сделать админом</a><small>|</small>
+                        }
+                        else
+                        {
+                            <a href=@Url.Action("UserRoleUnset", "Admin", new { Id = Model[i].Id, Role = "Admin" })>Снять с админа</a><small>|</small>
+                        }
+                    }
                 }
             </td>
         </tr>

@@ -1,0 +1,57 @@
+﻿@model Vote.Forms.PlacesSearch
+<link href="~/css/placesSearch.css" rel="stylesheet" />
+<div class="search">
+    <input type="search" id="search" name="name" value="" placeholder="Поиск" />
+</div>
+<div class="search__total" id="counter">
+    @Model.Total всего
+</div>
+<div class="place__container" id="container">
+    @foreach (int id in Model.PlacesId)
+    {
+        <div class="place">
+            @await Component.InvokeAsync("PlaceInfo", new { id, showDetail = true })
+        </div>
+    }
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript">
+    let search = document.getElementById("search");
+    search.onchange = (e) => {
+        console.log("e", e);
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetVotePlaces", "Map")',
+            accept: 'application/json',
+            data: {
+                searchString: e.target.value
+            },
+            success: (PlacesSearch) => {
+                console.log("PlacesSearch", PlacesSearch);
+                let container = document.getElementById("container");
+                while (container.lastElementChild) {
+                    container.removeChild(container.lastElementChild);
+                }
+                counter.innerHTML = PlacesSearch.length ? PlacesSearch.length : 0 + " всего";
+                for (let placeId of PlacesSearch.placesId) {
+                    let newDiv = document.createElement("div");
+                    $.ajax({
+                        type: 'GET',
+                        url: '@Url.Action("GetPlaceInfoViewComponent", "Map")',
+                        accept: 'application/json',
+                        data: {
+                            id: placeId,
+                        },
+                        success: (data) => {
+                            newDiv.classList.add("place");
+                            newDiv.innerHTML = data;
+                            container.appendChild(newDiv);
+                        }
+                    });
+                }
+            }
+        });
+    };
+</script>

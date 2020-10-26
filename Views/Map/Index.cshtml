@@ -88,7 +88,7 @@
 
 <div id="map"></div>
 
-@if (ViewBag.showResults)
+@if (ViewBag.ShowResults)
 {
     <h4>Текущая статистика по голосованию</h4>
     <div style="width: 100%; align-items: center">
@@ -100,7 +100,3 @@ else
     <h4>Текущая статистика по голосованию недоступна до окончания голосования</h4>
     <h4>Дата окончания голосования: @ViewBag.EndAt</h4>
 }
-
-<div style="width: 100%; align-items: center">
-    <div id="chart"></div>
-</div>

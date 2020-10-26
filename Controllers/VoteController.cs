@@ -3,38 +3,69 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Google.Apis.Logging;
+using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Vote.Data;
+using Repositories;
 using Vote.Forms;
-using Vote.Models;
+using Services.VoteModelService;
+using Services.TargetModelService;
+using Microsoft.AspNetCore.Identity;
+using Services.PhoneNumberModelService;
+using Services.VotePlaceModelService;
+using Services.VoteProcessModelService;
+using System.Data.Common;
+using System.Reflection.Metadata;
 
 namespace Vote.Controllers
 {
     public class VoteController : Controller
     {
-        private readonly VoteContext _context;
         private readonly ILogger<VoteController> _logger;
-        public VoteController(VoteContext context, ILogger<VoteController> logger)
+        private readonly IVoteModelService _voteModelService;
+        private readonly ITargetModelService _targetModelService;
+        private readonly IPhoneNumberModelService _phoneNumberModelService;
+        private readonly IVotePlaceModelService _votePlaceModelService;
+        private readonly IVoteProcessModelService _voteProcessModelService;
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public VoteController(
+            ILogger<VoteController> logger, 
+            IVoteModelService voteModelService,
+            ITargetModelService targetModelService,
+            IPhoneNumberModelService phoneNumberModelService,
+            IVotePlaceModelService votePlaceModelService,
+            IVoteProcessModelService voteProcessModelService,
+            UserManager<ApplicationUser> userManager)
         {
-            _context = context;
             _logger = logger;
+            _voteModelService = voteModelService;
+            _targetModelService = targetModelService;
+            _userManager = userManager;
+            _phoneNumberModelService = phoneNumberModelService;
+            _votePlaceModelService = votePlaceModelService;
+            _voteProcessModelService = voteProcessModelService;
         }
         [AllowAnonymous]
         public async Task<ActionResult> Index()
         {
-            SelectList places = await GetVotePlacesForSelect("Region");
-            SelectList targets = new SelectList(await _context.Target.ToListAsync(), "Id", "Name");
+            SelectList places = GetVotePlacesForSelect("Region");
+            SelectList targets = new SelectList(_targetModelService.GetTargetModels(), "Id", "Name");
 
             ViewBag.Places = places;
             ViewBag.Targets = targets;
 
             var voteForm = new VoteForm();
+
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                ApplicationUser user = await _userManager.GetUserAsync(User);
+                voteForm.PhoneNumber = user.PhoneNumber;
+            }
 
             return View(voteForm);
         }
@@ -43,26 +74,45 @@ namespace Vote.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Index(VoteForm voteForm)
         {
+            if (_phoneNumberModelService.GetPhoneNumberModels().Where(phone => phone.PhoneNumber == voteForm.PhoneNumber).ToList().Count != 0)
+            {
+                ModelState.AddModelError("Телефонный номер", "Голос с использованием такого номера уже есть!");
+            }
+            if (voteForm.Place == null)
+            {
+                ModelState.AddModelError("Место для голосования", "Пожалуйста, выберите место для голосования.");
+            }
+
             if (ModelState.IsValid)
             {
-                TargetModel target = await _context.Target.FindAsync(Convert.ToInt32(voteForm.Target));
-                VotePlaceModel place = await _context.VotePlace.FindAsync(Convert.ToInt32(voteForm.Place));
-                VoteProcessModel process = await _context.VoteProcess.LastAsync();
-                _context.Vote.Add(
+                TargetModel target = _targetModelService.GetTargetModel(Convert.ToInt32(voteForm.Target));
+                VotePlaceModel place = _votePlaceModelService.GetVotePlaceModel(Convert.ToInt32(voteForm.Place));
+                VoteProcessModel process = _voteProcessModelService.GetVoteProcessModels().ToList().Last();
+                PhoneNumberModel phoneNumber;
+
+                if (HttpContext.User.Identity.IsAuthenticated)
+                {
+                    ApplicationUser user = await _userManager.GetUserAsync(User);
+                    phoneNumber = new PhoneNumberModel() { PhoneNumber = user.PhoneNumber };
+                } else
+                {
+                    phoneNumber = new PhoneNumberModel() { PhoneNumber = voteForm.PhoneNumber };
+                }
+
+                _voteModelService.InsertVoteModel(
                     new VoteModel()
                     {
                         CreatedAt = DateTime.Now,
                         TargetId = target,
                         VotePlaceId = place,
-                        PhoneNumberq = voteForm.PhoneNumber,
+                        PhoneNumberId = phoneNumber,
                         VoteProcessId = process
-                    }
-                );
-                await _context.SaveChangesAsync();
+                    });
+
+                //await _context.SaveChangesAsync();
                 _logger.LogInformation($"{voteForm.PhoneNumber} voted");
                 return RedirectToAction(nameof(VoteSuccess));
-            } else
-            {
+            } else {
                 return await Index();
             }
         }
@@ -82,47 +132,33 @@ namespace Vote.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        // POST: VoteController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public SelectList GetVotePlacesForSelect(string field, string text = null)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        public async Task<SelectList> GetVotePlacesForSelect(string field, string text = null)
-        {
-            List<VotePlaceModel> places_raw = new List<VotePlaceModel>();
+            IQueryable<VotePlaceModel> places_raw = _votePlaceModelService.GetVotePlaceModels();
             SelectList places = new SelectList(places_raw);
+
             if (text == null)
             {
-                places_raw = await _context.VotePlace.ToListAsync();
-                places = new SelectList(places_raw, "Id", field, places_raw[0].Id);
+                places = new SelectList(places_raw.ToList(), "Id", field, places_raw.First().Id);
             } else
             {
                 switch (field)
                 {
                     case "Region":
-                        places_raw = await _context.VotePlace.Where(place => place.Region == text).ToListAsync();
-                        places = new SelectList(places_raw, "Id", "Town", places_raw[0].Id);
+                        places_raw = places_raw.Where(place => place.Region == text);
+                        places = new SelectList(places_raw.ToList(), "Id", "Town", places_raw.First().Id);
                         break;
                     case "Town":
-                        places_raw = await _context.VotePlace.Where(place => place.Town == text).ToListAsync();
-                        places = new SelectList(places_raw, "Id", "Street", places_raw[0].Id);
+                        places_raw = places_raw.Where(place => place.Town == text);
+                        places = new SelectList(places_raw.ToList(), "Id", "Street", places_raw.First().Id);
                         break;
                     case "Street":
-                        places_raw = await _context.VotePlace.Where(place => place.Street == text).ToListAsync();
-                        places = new SelectList(places_raw, "Id", "House", places_raw[0].Id);
+                        places_raw = places_raw.Where(place => place.Street == text);
+                        places = new SelectList(places_raw.ToList(), "Id", "House", places_raw.First().Id);
                         break;
                     case "House":
-                        places_raw = await _context.VotePlace.Where(place => place.House == text).ToListAsync();
-                        places = new SelectList(places_raw, "Id", "House", places_raw[0].Id);
+                        places_raw = places_raw.Where(place => place.House == text);
+                        places = new SelectList(places_raw.ToList(), "Id", "House", places_raw.First().Id);
                         break;
                     default:
                         break;

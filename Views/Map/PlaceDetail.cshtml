@@ -1,36 +1,11 @@
-﻿@model Vote.Forms.EvidenceForm
-<link href="~/css/placeDetail.css" rel="stylesheet" />
+﻿<link href="~/css/placeDetail.css" rel="stylesheet" />
 <h1>Информация о месте голосования</h1>
 <div class="place-detail__container">
     <div class="place-detail__info">
         @await Component.InvokeAsync("PlaceInfo", new { id = ViewBag.Id, showDetail=false})
     </div>
     <div class="place-detail__create-evidence">
-        @if (ViewBag.isAuthenticated)
-        {
-            <form asp-controller="Map" asp-action="PlaceDetail" method="post" enctype="multipart/form-data">
-                <div class="create-evidence__title">
-                    Есть какая-либо компрометирующая информация?
-                </div>
-                <div class="create-evidence__text">
-                    <label asp-for="Comment"></label>
-                    <textarea asp-for="Comment" name="Comment">
-                    </textarea>
-                </div>
-                <div class="create-evidence__files">
-                    <input asp-for="File1" name="File1" type="file" class="evidence__files" />
-                    <input asp-for="File2" name="File2" type="file" class="evidence__files" />
-                    <input asp-for="File3" name="File3" type="file" class="evidence__files" />
-                </div>
-                <input asp-for="PlaceId" name="PlaceId" type="hidden" />
-                <input type="submit" value="Отправить" />
-            </form>
-        } else
-        {
-            <div>
-                <a href="/Identity/Account/Login">Войдите</a>, чтобы можно было оставлять компрометирующую информацию
-            </div>
-        }
+        @await Component.InvokeAsync("EvidenceEdit", new {  })
     </div>
     @if (@ViewBag.evidences != null && @ViewBag.evidences?.Count != 0)
     {
@@ -39,35 +14,43 @@
         </div>
         <div class="place-detail__evidences">
             <div class="evidences__container">
-                @foreach (var item in @ViewBag.evidences)
+                @foreach (var evidence in @ViewBag.evidences)
                 {
                 <div class="evidence">
                     <div class="evidence__index">
-                        @item.index
+                        @evidence.index
                     </div>
                     <div class="evidence__user">
-                        @item.Email
+                        @evidence.Email
+                    </div>
+                    <div class="evidence__date">
+                        @evidence.Evidence.CreatedAt
                     </div>
                     <div class="evidence__comment">
                         <div class="evidence__title">Комментарий</div>
-                        @item.Evidence.Comment
+                        @evidence.Evidence.Comment
                     </div>
-                    @if (item.Files != null)
+                    @if (User.IsInRole("Manager") || User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
                     {
-                <div class="evidence__files">
-                    <div class="evidence__title">Прикреплённые файлы</div>
-                    @foreach (var file in item.Files)
+                        <a href="@Url.Action("EditEvidence", "Evidence", new { id = evidence.Evidence.Id })">Изменить</a>
+                    }
+                    @if (evidence.Files != null)
                     {
-                        @if (file != null)
-                        {
-                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(file.File)" />
-                        }
-                    }
-                </div>
-                    }
-                    <div class="evidence__date">
+                        <div class="evidence__files">
+                            <div class="evidence__title">Прикреплённые файлы</div>
+                            @foreach (var file in evidence.Files)
+                            {
+                                @if (file != null)
+                                {
+                                    <div class="evidence__file">
 
-                    </div>
+                                        <a href="@file.Path"><img class="evidence__img" src="@file.Path" alt="" /></a>
+                                        <a class="file__link" href="@file.Path">Приложение @evidence.Files.IndexOf(file)</a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    }
                 </div>
                 }
             </div>

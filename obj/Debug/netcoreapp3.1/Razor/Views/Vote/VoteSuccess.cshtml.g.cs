@@ -19,15 +19,8 @@ using Vote;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 2 "C:\Users\Vlad\source\repos\Vote\Vote\Views\_ViewImports.cshtml"
-using Vote.Models;
-
-#line default
-#line hidden
-#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1c50c65e6388be2ae702da0626930495b659e506", @"/Views/Vote/VoteSuccess.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b2577c3f8547dd98708bf693a6552124c3998e7d", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b1c31c412bf342c5711f6773db7553ca2b4cba32", @"/Views/_ViewImports.cshtml")]
     public class Views_Vote_VoteSuccess : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

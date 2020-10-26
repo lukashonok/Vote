@@ -9,13 +9,15 @@
 .prop__title {
     border-right: 1px solid #dee2e6;
     text-align: center;
-    padding: 10px
+    padding: 10px;
+    box-shadow: 0 .20rem .5rem rgba(0, 0, 0, .04);
 }
 
 .prop {
     text-align: center;
     padding: 10px;
     border: 1px solid #dee2e6;
+    box-shadow: 0 .20rem .5rem rgba(0, 0, 0, .04);
 }
 
 .table__user {

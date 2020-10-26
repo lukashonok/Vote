@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Threading.Tasks;
-using Vote.Areas.Identity.Data;
 
 namespace Vote.Areas.AdminPanel.Forms
 {
@@ -18,5 +14,6 @@ namespace Vote.Areas.AdminPanel.Forms
         public bool EmailConfirmed { get; set; }
         public string Phone { get; set; }
         public int AccessFailedCount { get; set; }
+        public List<string> Roles { get; set; }
     }
 }

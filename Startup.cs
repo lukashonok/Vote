@@ -1,20 +1,22 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
-using Vote.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Vote.Areas.Identity.Data;
 using Vote.Services;
-using System.Security.Policy;
+using Repositories;
+using Entities;
+using Services.VoteModelService;
+using Services.TargetModelService;
+using Services.VotePlaceModelService;
+using Services.VoteProcessModelService;
+using Services.CompromisingEvidenceFileModelService;
+using Services.CompromisingEvidenceModelService;
+using Services.PhoneNumberModelService;
 
 namespace Vote
 {
@@ -31,10 +33,21 @@ namespace Vote
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<VoteContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(Config.ConnectionString);
+                //options.UseSqlServer(Config.ConnectionString);
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("ApplicationDbContextConnection")
+                    );
             });
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient<IVoteModelService, VoteModelService>();
+            services.AddTransient<ITargetModelService, TargetModelService>();
+            services.AddTransient<IVotePlaceModelService, VotePlaceModelService>();
+            services.AddTransient<IVoteProcessModelService, VoteProcessModelService>();
+            services.AddTransient<ICompromisingEvidenceFileModelService, CompromisingEvidenceFileModelService>();
+            services.AddTransient<ICompromisingEvidenceModelService, CompromisingEvidenceModelService>();
+            services.AddTransient<IPhoneNumberModelService, PhoneNumberModelService>();
 
             services.AddAuthentication()
                 .AddGoogle(options =>
@@ -47,6 +60,7 @@ namespace Vote
 
 
             services.AddTransient<IViewRenderService, ViewRenderService>();
+            
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -94,6 +108,7 @@ namespace Vote
 
         private void CreateRoles(IServiceProvider serviceProvider)
         {
+            const string SuperAdmin = "SuperAdmin";
             const string ADMIN = "Admin";
             const string MANAGER = "Manager";
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -101,13 +116,15 @@ namespace Vote
             Task<IdentityResult> roleResult;
             string email = "vladlykashonok@gmail.com";
 
-            Task<bool> hasAdminRole = roleManager.RoleExistsAsync(ADMIN);
-            hasAdminRole.Wait();
+            Task<bool> hasSuperAdminRole = roleManager.RoleExistsAsync(SuperAdmin);
+            hasSuperAdminRole.Wait();
             Task<bool> hasManagerRole = roleManager.RoleExistsAsync(MANAGER);
             hasManagerRole.Wait();
-            if (!hasAdminRole.Result)
+            Task<bool> hasAdminRole = roleManager.RoleExistsAsync(ADMIN);
+            hasAdminRole.Wait();
+            if (!hasSuperAdminRole.Result)
             {
-                roleResult = roleManager.CreateAsync(new IdentityRole(ADMIN));
+                roleResult = roleManager.CreateAsync(new IdentityRole(SuperAdmin));
                 roleResult.Wait();
             }
             if (!hasManagerRole.Result)
@@ -115,9 +132,15 @@ namespace Vote
                 roleResult = roleManager.CreateAsync(new IdentityRole(MANAGER));
                 roleResult.Wait();
             }
+            if (!hasAdminRole.Result)
+            {
+                roleResult = roleManager.CreateAsync(new IdentityRole(ADMIN));
+                roleResult.Wait();
+            }
 
             Task<ApplicationUser> adminUser = userManager.FindByEmailAsync(email);
             adminUser.Wait();
+
 
             if (adminUser.Result == null)
             {
@@ -132,7 +155,7 @@ namespace Vote
 
                 if (newUser.Result.Succeeded)
                 {
-                    Task<IdentityResult> newUserRole = userManager.AddToRoleAsync(administrator, ADMIN);
+                    Task<IdentityResult> newUserRole = userManager.AddToRoleAsync(administrator, SuperAdmin);
                     newUserRole.Wait();
                 }
             }

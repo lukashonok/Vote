@@ -1,12 +1,12 @@
 ﻿using System;
+using Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Vote.Areas.Identity.Data;
-using Vote.Data;
+using Repositories;
 
 [assembly: HostingStartup(typeof(Vote.Areas.Identity.IdentityHostingStartup))]
 namespace Vote.Areas.Identity
@@ -17,17 +17,17 @@ namespace Vote.Areas.Identity
         {
             builder.ConfigureServices((context, services) =>
             {
-                services.AddDbContext<VoteContext>(options =>
+                services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(
-                context.Configuration.GetConnectionString("VoteContextConnection")));
+                context.Configuration.GetConnectionString("ApplicationDbContextConnection")));
 
                 services.AddIdentity<ApplicationUser, IdentityRole>(options =>
                 {
                     options.SignIn.RequireConfirmedAccount = false;
                     options.SignIn.RequireConfirmedEmail = true;
                 })
-                .AddEntityFrameworkStores<VoteContext>()
-                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                //.AddRoles<IdentityRole>()
                 .AddDefaultTokenProviders();
             });
         }

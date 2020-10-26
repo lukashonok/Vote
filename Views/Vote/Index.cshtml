@@ -6,12 +6,14 @@
     <div class="form">
         <div class="form__title"></div>
         <form asp-controller="Vote" asp-action="Index" method="post">
+            <div asp-validation-summary="All"></div>
             <div class="form__fields">
                 <span class="form__error" asp-validation-for="PhoneNumber"></span>
                 <label asp-for="PhoneNumber"></label>
                 <div class="form__field">
-                    <input asp-for="PhoneNumber" type="text" id="phone" placeholder="Ваш Номер">
+                    <input asp-for="PhoneNumber" value="@Model.PhoneNumber" type="text" id="phone" placeholder="Ваш телефон">
                 </div>
+
                 <label asp-for="Place"></label>
                 <div class="form__field">
                     <select id="select-region" asp-items="@ViewBag.Places"></select>

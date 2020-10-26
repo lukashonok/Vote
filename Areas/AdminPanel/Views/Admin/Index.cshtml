@@ -1,4 +1,4 @@
-﻿@model Vote.Forms.VoteProcessForm
+﻿@model Vote.Areas.AdminPanel.VoteProcessForm
 <h1>Управление процессом голосования</h1>
 @ViewBag.Message
 @if (User.IsInRole("Admin"))
@@ -10,10 +10,10 @@
             <div class="form__title"></div>
             <form asp-area="AdminPanel" asp-controller="Admin" asp-action="Index" method="post">
                 <div class="form__fields">
-                    <span class="form__error" asp-validation-for="showResults"></span>
-                    <label asp-for="showResults"></label>
+                    <span class="form__error" asp-validation-for="ShowResults"></span>
+                    <label asp-for="ShowResults"></label>
                     <div class="form__field">
-                        <input asp-for="showResults" type="checkbox" id="phone" placeholder="Ваш Номер" value="@ViewBag.showResults">
+                        <input asp-for="ShowResults">
                     </div>
                     <label asp-for="CreatedAt"></label>
                     <div class="form__field">

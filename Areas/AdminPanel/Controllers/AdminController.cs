@@ -1,63 +1,72 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Entities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Repositories;
+using Services.CompromisingEvidenceFileModelService;
+using Services.CompromisingEvidenceModelService;
+using Services.VoteProcessModelService;
 using Vote.Areas.AdminPanel.Forms;
-using Vote.Areas.Identity.Data;
 using Vote.Controllers;
-using Vote.Data;
 using Vote.Forms;
-using Vote.Models;
 
 namespace Vote.Areas.AdminPanel.Controllers
 {
     [Area("AdminPanel")]
     public class AdminController : Controller
     {
-        UserManager<ApplicationUser> _userManager;
-        private readonly VoteContext _context;
-        public AdminController(UserManager<ApplicationUser> userManager, VoteContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IVoteProcessModelService _voteProcessModelService;
+        private readonly ICompromisingEvidenceModelService _compromisingEvidenceModelService;
+        private readonly ICompromisingEvidenceFileModelService _compromisingEvidenceFileModelService;
+        public AdminController(
+            UserManager<ApplicationUser> userManager,
+            IVoteProcessModelService voteProcessModelService,
+            ICompromisingEvidenceModelService compromisingEvidenceModelService,
+            ICompromisingEvidenceFileModelService compromisingEvidenceFileModelService)
         {
             _userManager = userManager;
-            _context = context;
+            _voteProcessModelService = voteProcessModelService;
+            _compromisingEvidenceFileModelService = compromisingEvidenceFileModelService;
+            _compromisingEvidenceModelService = compromisingEvidenceModelService;
         }
 
-        [Authorize(Roles = "Admin,Manager")]
-        public async Task<ActionResult> Index()
+        [Authorize(Roles = "SuperAdmin,Admin,Manager")]
+        public ActionResult Index()
         {
-            var voteProcess = await _context.VoteProcess.FindAsync(1);
+            var voteProcess = _voteProcessModelService.GetVoteProcessModels().ToList().Last();
             var voteProcessForm = new VoteProcessForm()
             {
                 Id = voteProcess.Id,
                 CreatedAt = voteProcess.CreatedAt,
                 EndAt = voteProcess.EndAt,
-                showResults = voteProcess.showResults
+                ShowResults = voteProcess.ShowResults
             };
             ViewBag.CreatedAt = voteProcess.CreatedAt;
             ViewBag.EndAt = voteProcess.EndAt;
-            ViewBag.showResults = voteProcess.showResults;
+            ViewBag.showResults = voteProcess.ShowResults;
             return View(voteProcessForm);
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> Index(VoteProcessForm voteProcessForm)
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        public ActionResult Index(VoteProcessForm voteProcessForm)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var voteProcessModel = await _context.VoteProcess.FindAsync(voteProcessForm.Id);
-                    voteProcessModel.showResults = voteProcessForm.showResults;
+                    var voteProcessModel = _voteProcessModelService.GetVoteProcessModels().First(process => process.Id == voteProcessForm.Id);
+
+                    voteProcessModel.ShowResults = voteProcessForm.ShowResults;
                     voteProcessModel.CreatedAt = voteProcessForm.CreatedAt;
                     voteProcessModel.EndAt = voteProcessForm.EndAt;
-                    _context.Entry(voteProcessModel).State = EntityState.Modified;
-                    await _context.SaveChangesAsync();
+
+                    _voteProcessModelService.UpdateVoteProcessModel(voteProcessModel);
                 }
                 catch (DbUpdateException /* ex */)
                 {
@@ -72,7 +81,7 @@ namespace Vote.Areas.AdminPanel.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize(Roles = "SuperAdmin,Admin,Manager")]
         public async Task<ActionResult> Users()
         {
             UsersForm UsersForm = new UsersForm()
@@ -81,6 +90,7 @@ namespace Vote.Areas.AdminPanel.Controllers
             };
             foreach (var user in await _userManager.Users.ToListAsync())
             {
+                var roles = await _userManager.GetRolesAsync(user);
                 UsersForm.Users.Add(
                     new AdminPanelUser()
                     {
@@ -89,16 +99,17 @@ namespace Vote.Areas.AdminPanel.Controllers
                         EmailConfirmed = user.EmailConfirmed,
                         Id = user.Id,
                         Phone = user.PhoneNumber,
+                        Roles = (await _userManager.GetRolesAsync(user)).ToList()
                     });
             }
             return View(UsersForm.Users);
         }
 
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize(Roles = "SuperAdmin,Admin,Manager")]
         public async Task<ActionResult> UserDetail(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
-            var evidences_raw = (from E in _context.CompromisingEvidence
+            var evidences_raw = (from E in _compromisingEvidenceModelService.GetCompromisingEvidenceModels()
                                  where E.UserId.Id == id
                                  select E).Include("UserId").Include("VotePlaceId");
             List<CompromisingEvidenceModel> evidences_pre = evidences_raw.ToList();
@@ -112,7 +123,7 @@ namespace Vote.Areas.AdminPanel.Controllers
                     {
                         Evidence = ev,
                         Files = await (
-                            from F in _context.CompromisingEvidenceFile
+                            from F in _compromisingEvidenceFileModelService.GetCompromisingEvidenceFileModels()
                             where F.CompromisingEvidenceId.Id == ev.Id
                             select F
                         ).ToListAsync(),
@@ -126,30 +137,30 @@ namespace Vote.Areas.AdminPanel.Controllers
             return View(userForm);
         }
 
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> UserDelete(string id)
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        public async Task<ActionResult> UserDelete(string Id)
         {
-            var user = await _userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(Id);
             await _userManager.DeleteAsync(user);
             return await Users();
         }
 
-        [HttpPost]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> UserRoleSet(string id, string Role)
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        public async Task<ActionResult> UserRoleSet(string Id, string Role)
         {
-            var user = await _userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(Id);
             await _userManager.AddToRoleAsync(user, Role);
-            return await Users();
+            var roles = await _userManager.GetRolesAsync(user);
+            return RedirectToAction(nameof(Users));
         }
 
-        [HttpPost]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> UserRoleUnset(string id, string Role)
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        public async Task<ActionResult> UserRoleUnset(string Id, string Role)
         {
-            var user = await _userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(Id);
             await _userManager.RemoveFromRoleAsync(user, Role);
-            return await Users();
+            var roles = await _userManager.GetRolesAsync(user);
+            return RedirectToAction(nameof(Users));
         }
     }
 }

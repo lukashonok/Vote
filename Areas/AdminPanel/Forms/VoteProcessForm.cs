@@ -4,14 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Vote.Forms
+namespace Vote.Areas.AdminPanel
 {
     public class VoteProcessForm
     {
         public int Id { get; set; }
         [Required]
+        [DataType("Boolean")]
         [Display(Name = "Показать текущие результаты голосования")]
-        public bool showResults { get; set; }
+        public Boolean ShowResults { get; set; }
 
         [Required]
         [DataType("Date")]
