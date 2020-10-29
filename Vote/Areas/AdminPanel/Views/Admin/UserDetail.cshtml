@@ -1,0 +1,122 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model Vote.Areas.AdminPanel.Forms.UserForm
+<link href="~/css/placeDetail.css" rel="stylesheet" />
+<h1>@Localizer["Account"]</h1>
+<div class="place-detail__container">
+    <div class="place-detail__info">
+        <div class="info__title">
+            @Localizer["Info"]
+        </div>
+        <div class="info__property info__property_main">
+            Id: @Model.User.Id
+        </div>
+        <div class="info__property info__property_main">
+            @Localizer["Mail"]: @Model.User.Email
+        </div>
+        <div class="info__property">
+            @Localizer["Confirm"]: @Model.User.EmailConfirmed
+        </div>
+        <div class="info__property">
+            @Localizer["Phone"]: @Model.User.PhoneNumber
+        </div>
+        <div class="info__property">
+            @Localizer["Number"]: @Model.User.AccessFailedCount
+        </div>
+    </div>
+    <div class="place-detail__create-evidence">
+        <form asp-controller="Admin" asp-area="AdminPanel" asp-action="UserDetail" method="post" enctype="multipart/form-data">
+            <div class="create-evidence__title">
+                @Localizer["Form"]
+            </div>
+            <div class="create-evidence__text create-evidence__text_prop">
+                <label>@Localizer["Phone"]</label>
+                <input asp-for="User.PhoneNumber" name="User.PhoneNumber">
+            </div>
+            <div class="create-evidence__text create-evidence__text_prop">
+                <label>@Localizer["Mail"]</label>
+                <input asp-for="User.Email" name="User.Email">
+            </div>
+            <div class="create-evidence__text create-evidence__text_prop">
+                <label>@Localizer["Confirm"]</label>
+                <input asp-for="User.EmailConfirmed" name="User.EmailConfirmed">
+            </div>
+            
+            <input asp-for="User.Id" name="User.Id" type="hidden">
+            <input type="submit" value="@Localizer["Change"]" />
+        </form>
+    </div>
+    <div class="place-detail__evidences" style="display: flex; justify-content: space-between">
+        @if (Model.Evidences != null && Model.Evidences?.Count != 0)
+        {
+            <div class="evidences__container evidences__container_half">
+                <div class="evidence__title">
+                    @Localizer["Evidences"]
+                </div>
+                @foreach (var item in Model.Evidences)
+                {
+                    <div class="evidence">
+                        <div class="evidence__index">
+                            @item.index
+                        </div>
+                        <div class="evidence__user">
+                            @item.Email
+                        </div>
+                        <div class="evidence__date">
+                            @item.Evidence.CreatedAt
+                        </div>
+                        <div class="evidence__user">
+                            @if (User.IsInRole("Manager") || User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+                            {
+                                <a href="@Url.Action("EditEvidence", "Evidence", new { id = item.Evidence.Id })">@Localizer["Change"]</a>
+                            }
+                        </div>
+                        <div class="evidence__comment">
+                            <div class="evidence__title">@Localizer["Comment"]</div>
+                            @item.Evidence.Comment
+                        </div>
+                        @if (item.Files != null && item.Files.Count() != 0)
+                        {
+                            <div class="evidence__files evidence__files_column">
+                                <div class="evidence__title">@Localizer["Attachments"]</div>
+                                @foreach (var file in item.Files)
+                                {
+                                    @if (file != null)
+                                    {
+                                        <a href="@file.Path">@Localizer["Attachment"] @item.Files.IndexOf(file)</a>
+                                    }
+                                }
+                            </div>
+                        }
+                        <div class="evidence__place">
+                            <div class="evidence__title">@Localizer["VotePlace"]</div>
+                            @await Component.InvokeAsync("PlaceInfo", new { id = item.Evidence.VotePlaceId.Id, showDetail = true })
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        @if (Model.Notifications != null && Model.Notifications?.Count != 0)
+        {
+            <div class="evidences__container evidences__container_half">
+                <div class="evidence__title">
+                    @Localizer["Notifications"]
+                </div>
+                @foreach (var notification in Model.Notifications)
+                {
+                    <div class="evidence">
+                        <div class="evidence__index">
+                            @(Model.Notifications.IndexOf(notification)+1)
+                        </div>
+                        <div class="evidence__date">
+                            @notification.CreatedAt
+                        </div>
+                        <div class="evidence__comment">
+                            @Localizer[notification.Message]
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>

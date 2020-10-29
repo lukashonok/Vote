@@ -1,0 +1,25 @@
+﻿.users__table {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.table__header {
+    border: 1px solid #dee2e6;
+}
+
+.prop__title {
+    border-right: 1px solid #dee2e6;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 .20rem .5rem rgba(0, 0, 0, .04);
+}
+
+.prop {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 .20rem .5rem rgba(0, 0, 0, .04);
+}
+
+.table__user {
+    margin-top: 10px;
+}

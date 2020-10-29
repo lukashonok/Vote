@@ -1,0 +1,12 @@
+﻿@model Vote.Forms.EvidenceForm
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<link rel="stylesheet" href="~/css/ordinaryForm.css">
+<link href="~/css/site.css" rel="stylesheet" />
+<div class="form__container">
+    <div class="form">
+        <div class="form__title">@Localizer["FormName"]</div>
+        @await Component.InvokeAsync("EvidenceEdit", new { id = ViewBag.Id })
+    </div>
+</div>

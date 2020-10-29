@@ -1,0 +1,68 @@
+﻿@model Vote.Forms.EvidenceForm
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<link href="~/css/placeDetail.css" rel="stylesheet" />
+@if (ViewBag.isAuthenticated)
+{
+    if (ViewBag.Create == true)
+    {
+        //Create
+<form asp-controller="Evidence" asp-action="EditEvidence" method="post" enctype="multipart/form-data">
+    <div class="create-evidence__title">
+        @Localizer["Add"]
+    </div>
+    <div class="create-evidence__text">
+        <label>@Localizer["Comment"]</label>
+        <textarea asp-for="Comment" name="Comment"></textarea>
+    </div>
+    <div class="create-evidence__files">
+        <input asp-for="Files" name="Files" value="@Model.Files" multiple="multiple" type="file" class="evidence__files" />
+    </div>
+    <input asp-for="PlaceId" name="PlaceId" type="hidden" />
+    <cool-button>@Localizer["Send"]</cool-button>
+</form>
+    }
+    else
+    {
+        //Edit
+<form asp-controller="Evidence" asp-action="EditEvidence" method="post" enctype="multipart/form-data">
+    <div class="create-evidence__title">
+        @Localizer["Add"]
+    </div>
+    @await Component.InvokeAsync("PlaceInfo", new { id = Model.PlaceId, showDetail = false })
+    <div class="create-evidence__text">
+        <label>@Localizer["Comment"]</label>
+        <textarea asp-for="Comment" name="Comment"></textarea>
+    </div>
+    <div class="create-evidence__files">
+        @if (ViewBag.Files != null)
+        {
+            <div class="evidence__title">@Localizer["Attachments"]</div>
+            foreach (var file in ViewBag.Files)
+            {
+                @if (file != null)
+                {
+                    <div class="evidence__file">
+                        <a class="file__link" href="@file.Path">@Localizer["Attachment"] @ViewBag.Files.IndexOf(file)</a>
+                    </div>
+                }
+            }
+        }
+        <div class="evidence__title">@Localizer["Attach"]</div>
+        <div class="evidence__title">
+            <input asp-for="Files" name="Files" value="@Model.Files" multiple="multiple" type="file" class="evidence__files" />
+        </div>
+    </div>
+    <input asp-for="PlaceId" name="PlaceId" type="hidden" />
+    <input asp-for="EvidenceId" name="EvidenceId" type="hidden" />
+    <cool-button>value="@Localizer["Send"]"</cool-button>
+
+</form>
+    }
+}
+else
+{
+<div>
+    <a href="/Identity/Account/Login">@Localizer["Enter"]</a>@Localizer["Reason"]
+</div>
+}

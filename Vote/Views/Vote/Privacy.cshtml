@@ -1,0 +1,17 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+<h1>@Localizer["p0"]</h1>
+
+<p>
+    @Localizer["p1"] <br />
+    @Localizer["p2"] <br />
+    @Localizer["p3"] <strong>@Localizer["p4"]</strong>.
+</p>
+<p>
+    @Localizer["p6"]
+</p>
+<div style="display: flex; flex-direction: column">
+    @foreach (var email in ViewBag.emails)
+    {
+        <div>@email</div>
+    }
+</div>

@@ -1,0 +1,41 @@
+﻿@model Vote.Areas.AdminPanel.VoteProcessForm
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+<h1 style="text-align: center">@Localizer["Managing"]</h1>
+@ViewBag.Message
+@if (User.IsInRole("Admin"))
+{
+    <link rel="stylesheet" href="~/css/ordinaryForm.css">
+    <link href="~/css/site.css" rel="stylesheet" />
+    <div class="form__container">
+        <div class="form">
+            <div class="form__title"></div>
+            <form asp-area="AdminPanel" asp-controller="Admin" asp-action="Index" method="post">
+                <div class="form__fields">
+                    <span class="form__error" asp-validation-for="ShowResults"></span>
+                    <label>@Localizer["Show"]</label>
+                    <div class="form__field">
+                        <input asp-for="ShowResults">
+                    </div>
+                    <label>@Localizer["Start"]</label>
+                    <div class="form__field">
+                        <input asp-for="CreatedAt">
+                    </div>
+                    <label>@Localizer["End"]</label>
+                    <div class="form__field">
+                        <input asp-for="EndAt">
+                    </div>
+                    <input asp-for="Id" type="hidden" name="id" value="@Model.Id" />
+                </div>
+                <div class="form__submit">
+                    <button class="nice-button" type="submit">@Localizer["Change"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+else if (User.IsInRole("Manager"))
+{
+<h2>
+    @Localizer["Permission"]
+</h2>
+}

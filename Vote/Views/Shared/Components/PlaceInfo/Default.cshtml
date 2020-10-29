@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<div class="info__title">
+    @Localizer["Info"]
+</div>
+<div class="info__property info__property_main">
+    @Localizer["Voted"] @ViewBag.TotalVotes
+</div>
+<div class="info__property info__property_main">
+    @Localizer["Evidences"] @ViewBag.TotalEvidences
+</div>
+<div class="info__property">
+    @Localizer["Region"] @ViewBag.Region
+</div>
+<div class="info__property">
+    @Localizer["Town"] @ViewBag.Town
+</div>
+<div class="info__property">
+    @Localizer["Street"] @ViewBag.Street
+</div>
+<div class="info__property">
+    @Localizer["Number"] @ViewBag.House
+</div>
+
+@if (ViewBag.showDetail)
+{
+    <a href=@Url.Action("PlaceDetail", "Map" , new {@ViewBag.Id})>@Localizer["Detail"]</a>
+}

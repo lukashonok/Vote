@@ -1,0 +1,112 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=c42f177a-bbcf-4377-b337-83fae5325dff" type="text/javascript"></script>
+<link href="~/css/map.css" rel="stylesheet" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="js/signalr/dist/browser/signalr.min.js"></script>
+<script>
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawCharts);
+
+    const hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl("/getStat")
+        .build();
+
+    hubConnection.on("Stat", function (data) {
+        drawCharts();
+        loadStatForMap();
+    });
+
+    hubConnection.start();
+
+    function drawCharts() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Tax Type');
+        data.addColumn('number', 'Tax Percentage');
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetVoteStat", "Map")',
+            accept: 'application/json',
+            success: function (voteStat) {
+                rows = [];
+
+                for (let row of voteStat.voteStats) {
+                    rows.push(
+                        [row.targetName, { v: row.v, f: row.f }]
+                    );
+                }
+
+                data.addRows(rows);
+
+                var option = {
+                    title: voteStat.Total ? '@Localizer["Total"]' + voteStat.Total  : '@Localizer["CurrentStatForVote"]',
+                    width: 500,
+                    height: 400
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('chart'));
+                chart.draw(data, option);
+            }
+        });
+    }
+
+    var geoMap;
+
+    ymaps.ready(init);
+    function init() {
+        geoMap = new ymaps.Map('map', {
+            center: [53.31, 28.02], // Москва
+            zoom: 8
+        }, {
+            //searchControlProvider: 'yandex#search'
+        });
+        loadStatForMap()
+    }
+    function loadStatForMap() {
+        //Loading markers from controller
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetMarks", "Map")',
+            accept: 'application/json',
+            success: function (markers) {
+                // and setting markers to map
+                if (geoMap) {
+                    for (let marker of markers) {
+                        geoMap.geoObjects.add(
+                            new ymaps.Placemark([marker.x, marker.y], {
+                                balloonContent: marker.balloonContent,
+                                iconContent: marker.iconContent,
+                            }, {
+                                preset: marker.preset,
+                                balloonCloseButton: marker.balloonCloseButton,
+                                hideIconOnBalloonOpen: marker.hideIconOnBalloonOpen,
+                            })
+                        );
+                    }
+                } else {
+                    throw "Map is not defined";
+                }
+            }
+        });
+    }
+</script>
+
+<div id="map"></div>
+
+@if (ViewBag.ShowResults)
+{
+<h4 style="text-align: center">@Localizer["CurrentStatForVote"]</h4>
+    <div style="width: 100%;">
+        <div id="chart" style="display: flex; justify-content:center; width: 100%"></div>
+    </div>
+}
+else
+{
+<div style="text-align: center">
+    <h4>@Localizer["CurrentStatUnavailable"]</h4>
+    <h4>@Localizer["Remain"].Value: @ViewBag.EndAt</h4>
+</div>
+}
