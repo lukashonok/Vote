@@ -25,8 +25,8 @@ namespace Repositories
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
-        //    string connection = "Server=(localdb)\\mssqllocaldb;Database=aspnet-Vote-F2ABA109-2547-4D2D-BC44-04C6649F52E6;Trusted_Connection=True;MultipleActiveResultSets=true";
-        //    optionsBuilder.UseSqlServer(connection, b => b.MigrationsAssembly("Vote"));
+        //    string connection = "Host=ec2-54-217-213-79.eu-west-1.compute.amazonaws.com;Port=5432;Database=dchr8ii7h7l198;Username=hvaawqcheeowwj;Password=f64ebe3496848928d2a4f6aac92145464ab2603b8b6b0738e87eb5054a97768b";
+        //    optionsBuilder.UseNpgsql(connection);
         //}
     }
 }
