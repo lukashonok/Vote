@@ -81,61 +81,62 @@
 
 <link rel="stylesheet" href="~/css/ordinaryForm.css">
 <link href="~/css/site.css" rel="stylesheet" />
+<link href="~/css/layout.css" rel="stylesheet" />
 <div class="form__container">
     <div class="form">
-        <div class="form__title">@Localizer["form"]</div>
-        <form asp-controller="Vote" asp-action="Index" method="post">
+        <div class="form__title">@Localizer["Log in"]</div>
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div asp-validation-summary="All"></div>
             <div class="form__fields">
                 <span class="form__error" asp-validation-for="Input.Email"></span>
-                <label>@Localizer["tel"]</label>
+                <label>@Localizer["Email"]</label>
                 <div class="form__field">
-                    <input asp-for="Input.Email" class="form-control" placeholder="@Localizer["tel"]" />
+                    <input asp-for="Input.Email" class="form-control" placeholder="@Localizer["Email"]" />
                 </div>
 
-                <label>@Localizer["tel"]</label>
+                <label>@Localizer["Password"]</label>
                 <div class="form__field">
-                    <input asp-for="Input.Password" class="form-control" />
+                    <input asp-for="Input.Password" class="form-control" placeholder="@Localizer["Password"]" />
                 </div>
 
                 <div class="checkbox">
-                    <label asp-for="Input.RememberMe">
+                    <label>
+                        @Localizer["Remember me"]
                         <input asp-for="Input.RememberMe" />
-                        @Html.DisplayNameFor(m => m.Input.RememberMe)
                     </label>
                 </div>
             </div>
             <div class="form__submit">
-                <button class="nice-button" type="submit">@Localizer["Vote"]</button>
-            </div>
-            <div class="form__additional">
-                <p>
-                    <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                </p>
-                <p>
-                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                </p>
-                @{
-                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                    {
-                        
-                    }
-                    else
-                    {
-                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                            <div>
-                                <p>
-                                    @foreach (var provider in Model.ExternalLogins)
-                                    {
-                                        <button type="submit" class="nice-button" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                    }
-                                </p>
-                            </div>
-                        </form>
-                    }
-                }
+                <button class="nice-button" type="submit">@Localizer["Log in"]</button>
             </div>
         </form>
+        <div class="form__additional">
+            <p>
+                <a id="forgot-password" class="layout-navbar__link" style="padding-left: 0" asp-page="./ForgotPassword">@Localizer["Forgot"]</a>
+            </p>
+            <p>
+                <a asp-page="./Register" class="layout-navbar__link" style="padding-left: 0" asp-route-returnUrl="@Model.ReturnUrl">@Localizer["Register as a new usr"]</a>
+            </p>
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins)
+                                {
+                                    <button type="submit" class="nice-button" name="provider" value="@provider.Name" title="@Localizer["Log in using"] @provider.DisplayName">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </div>
     </div>
 </div>
 

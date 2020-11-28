@@ -1,8 +1,8 @@
 ﻿@model List<Vote.Areas.AdminPanel.Forms.AdminPanelUser>
 @inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
 
-<link href="~/css/users.css" rel="stylesheet" />
-<table class="users__table">
+<link href="~/css/table.css" rel="stylesheet" />
+<table class="vote__table">
     <tr class="table__header">
         <th class="prop__title">@Localizer["Mail"]</th>
         <th class="prop__title">@Localizer["Confirm"]</th>
@@ -31,7 +31,7 @@
             <td class="prop">
                 @if (!Model[i].Roles.Contains("SuperAdmin") || User.IsInRole("SuperAdmin"))
                 {
-                <a href=@Url.Action("UserDetail", "Admin", new { Id = Model[i].Id })>@Localizer["Detail"]</a><small>,</small>
+                    <a href=@Url.Action("UserDetail", "Admin", new { Id = Model[i].Id })>@Localizer["Detail"]</a><small>,</small>
                 }
                 @if (User.IsInRole("SuperAdmin"))
                 {

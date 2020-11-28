@@ -22,16 +22,15 @@
     hubConnection.start();
 
     function drawCharts() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Tax Type');
-        data.addColumn('number', 'Tax Percentage');
-
         $.ajax({
             type: 'GET',
             url: '@Url.Action("GetVoteStat", "Map")',
             accept: 'application/json',
             success: function (voteStat) {
                 rows = [];
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Tax Type');
+                data.addColumn('number', 'Tax Percentage');
 
                 for (let row of voteStat.voteStats) {
                     rows.push(
@@ -49,6 +48,39 @@
 
                 var chart = new google.visualization.PieChart(document.getElementById('chart'));
                 chart.draw(data, option);
+
+                console.log(voteStat);
+
+                var dataRegion_raw = [['@Localizer["Candidate"]', ...voteStat.voteStatsRegion.targets]];
+                for (var region of voteStat.voteStatsRegion.regions) {
+                    dataRegion_raw.push([region]);
+                    for (var target of voteStat.voteStatsRegion.targets) {
+                        dataRegion_raw[dataRegion_raw.length - 1]
+                            .push(voteStat.voteStatsRegion.regionStates[region][target] ? voteStat.voteStatsRegion.regionStates[region][target] : 0);
+                    }
+                }
+                var dataRegion = google.visualization.arrayToDataTable(dataRegion_raw);
+
+                //var dataRegion = google.visualization.arrayToDataTable([
+                //    ['Candidate', "Лукашёнок", "Тихонович"],
+                //    ['Брест', 1323, 344456],
+                //    ['Минск', 313, 1342352],
+                //    ['Гомель', 22, 312412],
+                //]);
+
+                var optionRegion = {
+                    title: '@Localizer["Stats"]',
+                    chartArea: { width: '60%' },
+                    hAxis: {
+                        title: '@Localizer["TotalVotes"]',
+                        minValue: 0
+                    },
+                    vAxis: {
+                        title: '@Localizer["Regions"]'
+                    }
+                };
+                var chartRegion = new google.visualization.BarChart(document.getElementById('chartRegion'));
+                chartRegion.draw(dataRegion, optionRegion);
             }
         });
     }
@@ -58,7 +90,7 @@
     ymaps.ready(init);
     function init() {
         geoMap = new ymaps.Map('map', {
-            center: [53.31, 28.02], // Москва
+            center: [53.31, 28.02],
             zoom: 8
         }, {
             //searchControlProvider: 'yandex#search'
@@ -99,9 +131,10 @@
 @if (ViewBag.ShowResults)
 {
 <h4 style="text-align: center">@Localizer["CurrentStatForVote"]</h4>
-    <div style="width: 100%;">
-        <div id="chart" style="display: flex; justify-content:center; width: 100%"></div>
-    </div>
+<div style="width: 100%;">
+    <div id="chart" style="display: flex; justify-content:center; width: 100%"></div>
+    <div id="chartRegion" style="display: flex; justify-content:center; width: 100%"></div>
+</div>
 }
 else
 {

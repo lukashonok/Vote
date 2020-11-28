@@ -1,0 +1,404 @@
+2020-11-28 15:14:13.1830||DEBUG|Vote.Program|init main 
+2020-11-28 15:14:23.4509||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 15:14:23.4886||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 15:14:23.5021||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 15:14:23.5021||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 15:14:23.5021||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 15:19:35.7171||WARN|Microsoft.AspNetCore.Identity.UserManager|Invalid password for user 4ec10ed6-c80d-4f52-932a-4f79bafb09ca. 
+2020-11-28 15:19:35.7389|2|WARN|Microsoft.AspNetCore.Identity.SignInManager|User 4ec10ed6-c80d-4f52-932a-4f79bafb09ca failed to provide the correct password. 
+2020-11-28 15:19:49.3234||INFO|Vote.Areas.Identity.Pages.Account.LoginModel|User logged in. 
+2020-11-28 15:58:04.8182||DEBUG|Vote.Program|init main 
+2020-11-28 15:58:09.7385||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 15:58:09.7385||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 15:58:09.7566||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 15:58:09.7566||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 15:58:09.7566||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 15:59:09.6441||DEBUG|Vote.Program|init main 
+2020-11-28 15:59:13.0573||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 15:59:13.0674||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 15:59:13.0674||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 15:59:13.0674||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 15:59:13.0674||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:09:17.3476||DEBUG|Vote.Program|init main 
+2020-11-28 16:09:21.2417||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:09:21.2537||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:09:21.2537||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:09:21.2537||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:09:21.2537||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:10:13.1297||DEBUG|Vote.Program|init main 
+2020-11-28 16:10:16.3458||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:10:16.3573||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:10:16.3661||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:10:16.3661||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:10:16.3661||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:12:09.7447|3|ERROR|Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor|The view 'Users' was not found. Searched locations: /Areas/AdminPanel/Views/Admin/Users.en.cshtml, /Areas/AdminPanel/Views/Admin/Users.cshtml, /Areas/AdminPanel/Views/Shared/Users.en.cshtml, /Areas/AdminPanel/Views/Shared/Users.cshtml, /Views/Shared/Users.en.cshtml, /Views/Shared/Users.cshtml, /Pages/Shared/Users.en.cshtml, /Pages/Shared/Users.cshtml 
+2020-11-28 16:12:09.8230|1|ERROR|Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware|An unhandled exception has occurred while executing the request. System.InvalidOperationException: The view 'Users' was not found. The following locations were searched:
+/Areas/AdminPanel/Views/Admin/Users.en.cshtml
+/Areas/AdminPanel/Views/Admin/Users.cshtml
+/Areas/AdminPanel/Views/Shared/Users.en.cshtml
+/Areas/AdminPanel/Views/Shared/Users.cshtml
+/Views/Shared/Users.en.cshtml
+/Views/Shared/Users.cshtml
+/Pages/Shared/Users.en.cshtml
+/Pages/Shared/Users.cshtml
+   at Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult.EnsureSuccessful(IEnumerable`1 originalLocations)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-11-28 16:13:56.0372||DEBUG|Vote.Program|init main 
+2020-11-28 16:13:59.8469||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:13:59.8619||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:13:59.8619||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:13:59.8837||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:13:59.8837||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:14:50.1638||DEBUG|Vote.Program|init main 
+2020-11-28 16:14:53.8085||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:14:53.8189||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:14:53.8189||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:14:53.8189||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:14:53.8326||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:15:18.9898||DEBUG|Vote.Program|init main 
+2020-11-28 16:15:22.3176||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:15:22.3176||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:15:22.3347||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:15:22.3347||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:15:22.3347||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:26:53.7094||DEBUG|Vote.Program|init main 
+2020-11-28 16:26:57.6816||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:26:57.6968||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:26:57.7069||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:26:57.7069||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:26:57.7069||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:27:25.8612||DEBUG|Vote.Program|init main 
+2020-11-28 16:27:29.9907||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:27:30.0199||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:27:30.0338||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:27:30.0338||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:27:30.0338||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:29:04.1437||DEBUG|Vote.Program|init main 
+2020-11-28 16:29:07.3779||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:29:07.3779||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:29:07.3956||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:29:07.3956||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:29:07.3956||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:30:25.9929||DEBUG|Vote.Program|init main 
+2020-11-28 16:30:29.3417||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:30:29.3505||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:30:29.3505||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:30:29.3614||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:30:29.3614||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:30:49.6191||DEBUG|Vote.Program|init main 
+2020-11-28 16:30:53.2305||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:30:53.2400||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:30:53.2400||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:30:53.2400||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:30:53.2534||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:31:02.7516|1|ERROR|Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware|An unhandled exception has occurred while executing the request. System.InvalidOperationException: The model item passed into the ViewDataDictionary is of type 'System.Collections.Generic.List`1[Entities.VotePlaceModel]', but this ViewDataDictionary instance requires a model item of type 'Entities.VotePlaceModel'.
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary.EnsureCompatible(Object value)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary..ctor(ViewDataDictionary source, Object model, Type declaredModelType)
+   at lambda_method(Closure , ViewDataDictionary )
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPagePropertyActivator.CreateViewDataDictionary(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPagePropertyActivator.Activate(Object page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPageActivator.Activate(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ActionContext actionContext, IView view, ViewDataDictionary viewData, ITempDataDictionary tempData, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-11-28 16:32:34.9464||DEBUG|Vote.Program|init main 
+2020-11-28 16:32:38.2451||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:32:38.2537||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:32:38.2537||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:32:38.2537||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:32:38.2537||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:33:11.0029||DEBUG|Vote.Program|init main 
+2020-11-28 16:33:14.3668||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:33:14.3789||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:33:14.3789||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:33:14.3789||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:33:14.3789||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:33:32.6911|1|ERROR|Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware|An unhandled exception has occurred while executing the request. System.InvalidOperationException: The model item passed into the ViewDataDictionary is of type 'System.Collections.Generic.List`1[Entities.VotePlaceModel]', but this ViewDataDictionary instance requires a model item of type 'Entities.VotePlaceModel'.
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary.EnsureCompatible(Object value)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary..ctor(ViewDataDictionary source, Object model, Type declaredModelType)
+   at lambda_method(Closure , ViewDataDictionary )
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPagePropertyActivator.CreateViewDataDictionary(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPagePropertyActivator.Activate(Object page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPageActivator.Activate(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ActionContext actionContext, IView view, ViewDataDictionary viewData, ITempDataDictionary tempData, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-11-28 16:34:35.2387||DEBUG|Vote.Program|init main 
+2020-11-28 16:34:38.6950||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:34:38.7060||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:34:38.7060||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:34:38.7060||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:34:38.7060||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:37:23.4097||DEBUG|Vote.Program|init main 
+2020-11-28 16:37:26.9619||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:37:26.9716||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:37:26.9716||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:37:26.9716||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:37:26.9716||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:37:45.1084|3|ERROR|Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor|The view 'PlaceDelete' was not found. Searched locations: /Areas/AdminPanel/Views/Admin/PlaceDelete.en.cshtml, /Areas/AdminPanel/Views/Admin/PlaceDelete.cshtml, /Areas/AdminPanel/Views/Shared/PlaceDelete.en.cshtml, /Areas/AdminPanel/Views/Shared/PlaceDelete.cshtml, /Views/Shared/PlaceDelete.en.cshtml, /Views/Shared/PlaceDelete.cshtml, /Pages/Shared/PlaceDelete.en.cshtml, /Pages/Shared/PlaceDelete.cshtml 
+2020-11-28 16:37:45.1520|1|ERROR|Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware|An unhandled exception has occurred while executing the request. System.InvalidOperationException: The view 'PlaceDelete' was not found. The following locations were searched:
+/Areas/AdminPanel/Views/Admin/PlaceDelete.en.cshtml
+/Areas/AdminPanel/Views/Admin/PlaceDelete.cshtml
+/Areas/AdminPanel/Views/Shared/PlaceDelete.en.cshtml
+/Areas/AdminPanel/Views/Shared/PlaceDelete.cshtml
+/Views/Shared/PlaceDelete.en.cshtml
+/Views/Shared/PlaceDelete.cshtml
+/Pages/Shared/PlaceDelete.en.cshtml
+/Pages/Shared/PlaceDelete.cshtml
+   at Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult.EnsureSuccessful(IEnumerable`1 originalLocations)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-11-28 16:42:20.9992|3|ERROR|Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor|The view 'PlaceDelete' was not found. Searched locations: /Areas/AdminPanel/Views/Admin/PlaceDelete.en.cshtml, /Areas/AdminPanel/Views/Admin/PlaceDelete.cshtml, /Areas/AdminPanel/Views/Shared/PlaceDelete.en.cshtml, /Areas/AdminPanel/Views/Shared/PlaceDelete.cshtml, /Views/Shared/PlaceDelete.en.cshtml, /Views/Shared/PlaceDelete.cshtml, /Pages/Shared/PlaceDelete.en.cshtml, /Pages/Shared/PlaceDelete.cshtml 
+2020-11-28 16:42:21.0220|1|ERROR|Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware|An unhandled exception has occurred while executing the request. System.InvalidOperationException: The view 'PlaceDelete' was not found. The following locations were searched:
+/Areas/AdminPanel/Views/Admin/PlaceDelete.en.cshtml
+/Areas/AdminPanel/Views/Admin/PlaceDelete.cshtml
+/Areas/AdminPanel/Views/Shared/PlaceDelete.en.cshtml
+/Areas/AdminPanel/Views/Shared/PlaceDelete.cshtml
+/Views/Shared/PlaceDelete.en.cshtml
+/Views/Shared/PlaceDelete.cshtml
+/Pages/Shared/PlaceDelete.en.cshtml
+/Pages/Shared/PlaceDelete.cshtml
+   at Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult.EnsureSuccessful(IEnumerable`1 originalLocations)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-11-28 16:42:57.3616||DEBUG|Vote.Program|init main 
+2020-11-28 16:43:00.8483||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:43:00.8483||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:43:00.8638||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:43:00.8638||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:43:00.8638||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:45:23.9293||DEBUG|Vote.Program|init main 
+2020-11-28 16:45:27.1997||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:45:27.2089||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:45:27.2089||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:45:27.2089||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:45:27.2223||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:48:11.3201||DEBUG|Vote.Program|init main 
+2020-11-28 16:48:15.4358||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:48:15.4439||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:48:15.4439||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:48:15.4439||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:48:15.4572||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:48:56.1855|10000|ERROR|Microsoft.EntityFrameworkCore.Update|An exception occurred in the database while saving changes for context type 'Repositories.ApplicationDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): New transaction is not allowed because there are other threads running in the session.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.TdsParser.TdsExecuteTransactionManagerRequest(Byte[] buffer, TransactionManagerRequestType request, String transactionName, TransactionManagerIsolationLevel isoLevel, Int32 timeout, SqlInternalTransaction transaction, TdsParserStateObject stateObj, Boolean isDelegateControlRequest)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.ExecuteTransactionYukon(TransactionRequest transactionRequest, String transactionName, IsolationLevel iso, SqlInternalTransaction internalTransaction, Boolean isDelegateControlRequest)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.ExecuteTransaction(TransactionRequest transactionRequest, String name, IsolationLevel iso, SqlInternalTransaction internalTransaction, Boolean isDelegateControlRequest)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.BeginSqlTransaction(IsolationLevel iso, String transactionName, Boolean shouldReconnect)
+   at Microsoft.Data.SqlClient.SqlConnection.BeginTransaction(IsolationLevel iso, String transactionName)
+   at Microsoft.Data.SqlClient.SqlConnection.BeginTransaction(IsolationLevel iso)
+   at Microsoft.Data.SqlClient.SqlConnection.BeginDbTransaction(IsolationLevel isolationLevel)
+   at System.Data.Common.DbConnection.BeginTransaction(IsolationLevel isolationLevel)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.BeginTransaction(IsolationLevel isolationLevel)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.BeginTransaction()
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+ClientConnectionId:2090aa2d-a11d-4b36-9f7c-66f8b4b81a49
+Error Number:3988,State:1,Class:16 Microsoft.Data.SqlClient.SqlException (0x80131904): New transaction is not allowed because there are other threads running in the session.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.TdsParser.TdsExecuteTransactionManagerRequest(Byte[] buffer, TransactionManagerRequestType request, String transactionName, TransactionManagerIsolationLevel isoLevel, Int32 timeout, SqlInternalTransaction transaction, TdsParserStateObject stateObj, Boolean isDelegateControlRequest)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.ExecuteTransactionYukon(TransactionRequest transactionRequest, String transactionName, IsolationLevel iso, SqlInternalTransaction internalTransaction, Boolean isDelegateControlRequest)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.ExecuteTransaction(TransactionRequest transactionRequest, String name, IsolationLevel iso, SqlInternalTransaction internalTransaction, Boolean isDelegateControlRequest)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.BeginSqlTransaction(IsolationLevel iso, String transactionName, Boolean shouldReconnect)
+   at Microsoft.Data.SqlClient.SqlConnection.BeginTransaction(IsolationLevel iso, String transactionName)
+   at Microsoft.Data.SqlClient.SqlConnection.BeginTransaction(IsolationLevel iso)
+   at Microsoft.Data.SqlClient.SqlConnection.BeginDbTransaction(IsolationLevel isolationLevel)
+   at System.Data.Common.DbConnection.BeginTransaction(IsolationLevel isolationLevel)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.BeginTransaction(IsolationLevel isolationLevel)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.BeginTransaction()
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+ClientConnectionId:2090aa2d-a11d-4b36-9f7c-66f8b4b81a49
+Error Number:3988,State:1,Class:16
+2020-11-28 16:50:31.4124||DEBUG|Vote.Program|init main 
+2020-11-28 16:50:34.7225||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:50:34.7225||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:50:34.7398||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:50:34.7398||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:50:34.7398||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:52:41.7733|10000|ERROR|Microsoft.EntityFrameworkCore.Update|An exception occurred in the database while saving changes for context type 'Repositories.ApplicationDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): New transaction is not allowed because there are other threads running in the session.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.TdsParser.TdsExecuteTransactionManagerRequest(Byte[] buffer, TransactionManagerRequestType request, String transactionName, TransactionManagerIsolationLevel isoLevel, Int32 timeout, SqlInternalTransaction transaction, TdsParserStateObject stateObj, Boolean isDelegateControlRequest)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.ExecuteTransactionYukon(TransactionRequest transactionRequest, String transactionName, IsolationLevel iso, SqlInternalTransaction internalTransaction, Boolean isDelegateControlRequest)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.ExecuteTransaction(TransactionRequest transactionRequest, String name, IsolationLevel iso, SqlInternalTransaction internalTransaction, Boolean isDelegateControlRequest)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.BeginSqlTransaction(IsolationLevel iso, String transactionName, Boolean shouldReconnect)
+   at Microsoft.Data.SqlClient.SqlConnection.BeginTransaction(IsolationLevel iso, String transactionName)
+   at Microsoft.Data.SqlClient.SqlConnection.BeginTransaction(IsolationLevel iso)
+   at Microsoft.Data.SqlClient.SqlConnection.BeginDbTransaction(IsolationLevel isolationLevel)
+   at System.Data.Common.DbConnection.BeginTransaction(IsolationLevel isolationLevel)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.BeginTransaction(IsolationLevel isolationLevel)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.BeginTransaction()
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+ClientConnectionId:281e6f56-8069-4ad3-a128-9b3c7af70cf5
+Error Number:3988,State:1,Class:16 Microsoft.Data.SqlClient.SqlException (0x80131904): New transaction is not allowed because there are other threads running in the session.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.TdsParser.TdsExecuteTransactionManagerRequest(Byte[] buffer, TransactionManagerRequestType request, String transactionName, TransactionManagerIsolationLevel isoLevel, Int32 timeout, SqlInternalTransaction transaction, TdsParserStateObject stateObj, Boolean isDelegateControlRequest)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.ExecuteTransactionYukon(TransactionRequest transactionRequest, String transactionName, IsolationLevel iso, SqlInternalTransaction internalTransaction, Boolean isDelegateControlRequest)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.ExecuteTransaction(TransactionRequest transactionRequest, String name, IsolationLevel iso, SqlInternalTransaction internalTransaction, Boolean isDelegateControlRequest)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.BeginSqlTransaction(IsolationLevel iso, String transactionName, Boolean shouldReconnect)
+   at Microsoft.Data.SqlClient.SqlConnection.BeginTransaction(IsolationLevel iso, String transactionName)
+   at Microsoft.Data.SqlClient.SqlConnection.BeginTransaction(IsolationLevel iso)
+   at Microsoft.Data.SqlClient.SqlConnection.BeginDbTransaction(IsolationLevel isolationLevel)
+   at System.Data.Common.DbConnection.BeginTransaction(IsolationLevel isolationLevel)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.BeginTransaction(IsolationLevel isolationLevel)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.BeginTransaction()
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+ClientConnectionId:281e6f56-8069-4ad3-a128-9b3c7af70cf5
+Error Number:3988,State:1,Class:16
+2020-11-28 16:53:09.4976||DEBUG|Vote.Program|init main 
+2020-11-28 16:53:12.6720||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:53:12.6793||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:53:12.6905||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:53:12.6905||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:53:12.6905||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 
+2020-11-28 16:57:59.0509||DEBUG|Vote.Program|init main 
+2020-11-28 16:58:02.3542||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 
+2020-11-28 16:58:02.3618||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 
+2020-11-28 16:58:02.3618||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2020-11-28 16:58:02.3618||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2020-11-28 16:58:02.3618||INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Vlad\source\repos\Vote\Vote 

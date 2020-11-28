@@ -35,6 +35,7 @@ namespace Vote.Controllers
             _compromisingEvidenceFileModelService = compromisingEvidenceFileModelService;
             _compromisingEvidenceModelService = compromisingEvidenceModelService;
         }
+
         public async Task<IActionResult> Index()
         {
             var currentUser = await _userManager.GetUserAsync(HttpContext.User);

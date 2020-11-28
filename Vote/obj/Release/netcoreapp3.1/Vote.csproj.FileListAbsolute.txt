@@ -4,10 +4,6 @@ C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\libman.json
 C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\Properties\serviceDependencies.json
 C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\Properties\serviceDependencies.local.json
-C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\Properties\serviceDependencies.Vote20201029214451 - Web Deploy.json
-C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\Properties\ServiceDependencies\Vote20201029214451 - Web Deploy\mssql1.arm.json
-C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\Properties\ServiceDependencies\Vote20201029214451 - Web Deploy\profile.arm.json
-C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\Properties\ServiceDependencies\Vote20201029214451 - Web Deploy\signalr1.arm.json
 C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\Vote.StaticWebAssets.xml
 C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\Vote.exe
 C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\Vote.deps.json
@@ -277,3 +273,18 @@ C:\Users\Vlad\source\repos\Vote\Vote\obj\Release\netcoreapp3.1\staticwebassets\V
 C:\Users\Vlad\source\repos\Vote\Vote\obj\Release\netcoreapp3.1\Vote.dll
 C:\Users\Vlad\source\repos\Vote\Vote\obj\Release\netcoreapp3.1\Vote.pdb
 C:\Users\Vlad\source\repos\Vote\Vote\obj\Release\netcoreapp3.1\Vote.genruntimeconfig.cache
+C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\nlog.config
+C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\Properties\serviceDependencies.Vote20201125230226 - Web Deploy.json
+C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\Properties\ServiceDependencies\Vote20201125230226 - Web Deploy\mssql1.arm.json
+C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\Properties\ServiceDependencies\Vote20201125230226 - Web Deploy\profile.arm.json
+C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\Properties\ServiceDependencies\Vote20201125230226 - Web Deploy\signalr1.arm.json
+C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\NLog.dll
+C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\NLog.Extensions.Logging.dll
+C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\NLog.Web.AspNetCore.dll
+C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\Npgsql.dll
+C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Vlad\source\repos\Vote\Vote\obj\Release\netcoreapp3.1\Vote.Resources.Areas.Identity.Pages.Account.Login.en.resources
+C:\Users\Vlad\source\repos\Vote\Vote\obj\Release\netcoreapp3.1\Vote.Resources.Areas.Identity.Pages.Account.Login.ru.resources
+C:\Users\Vlad\source\repos\Vote\Vote\obj\Release\netcoreapp3.1\Vote.Resources.Areas.Identity.Pages.Account.Register.en.resources
+C:\Users\Vlad\source\repos\Vote\Vote\obj\Release\netcoreapp3.1\Vote.Resources.Areas.Identity.Pages.Account.Register.ru.resources
+C:\Users\Vlad\source\repos\Vote\Vote\obj\Release\netcoreapp3.1\Razor\Views\Vote\Error.cshtml.g.cs

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "6DIptrKMraT4qjwOZR/GCtqe8iNvsioOoVTi1v9+0qmxo5TDFxqm/k6QEwRSM3f104V2i1Asez0VqC5SkrR4vw==",
+  "dgSpecHash": "QbTgFLl/5+JkA9+wILBZs13INMjVN3PN4dFmaonELMNmhC3oL6BIolJQdw/zf5M2CEw3w8oGttVn0WYJzVTFYQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Vlad\\source\\repos\\Vote\\Vote\\Vote.csproj",
   "expectedPackageFiles": [
@@ -120,6 +120,9 @@
     "C:\\Users\\Vlad\\.nuget\\packages\\mimekit\\2.9.2\\mimekit.2.9.2.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\Vlad\\.nuget\\packages\\nlog\\4.7.5\\nlog.4.7.5.nupkg.sha512",
+    "C:\\Users\\Vlad\\.nuget\\packages\\nlog.extensions.logging\\1.6.4\\nlog.extensions.logging.1.6.4.nupkg.sha512",
+    "C:\\Users\\Vlad\\.nuget\\packages\\nlog.web.aspnetcore\\4.9.3\\nlog.web.aspnetcore.4.9.3.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\npgsql\\4.1.3.1\\npgsql.4.1.3.1.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\3.1.4\\npgsql.entityframeworkcore.postgresql.3.1.4.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\nuget.frameworks\\4.7.0\\nuget.frameworks.4.7.0.nupkg.sha512",

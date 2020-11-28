@@ -1,0 +1,42 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+@model Entities.VotePlaceModel
+<link rel="stylesheet" href="~/css/ordinaryForm.css">
+<link href="~/css/site.css" rel="stylesheet" />
+<div class="form__container">
+    <div class="form">
+        <div class="form__title">@Localizer["form"]</div>
+        <form asp-area="AdminPanel" asp-controller="Admin" asp-action="PlaceDetail" method="post">
+            <div asp-validation-summary="All"></div>
+            <input asp-for="Id" value="@Model.Id" type="hidden">
+            <div class="form__fields">
+                <label>@Localizer["Region"]</label>
+                <div class="form__field">
+                    <input asp-for="Region" value="@Model.Region" type="text">
+                </div>
+                <label>@Localizer["Town"]</label>
+                <div class="form__field">
+                    <input asp-for="Town" value="@Model.Town" type="text">
+                </div>
+                <label>@Localizer["Street"]</label>
+                <div class="form__field">
+                    <input asp-for="Street" value="@Model.Street" type="text">
+                </div>
+                <label>@Localizer["House"]</label>
+                <div class="form__field">
+                    <input asp-for="House" value="@Model.House" type="text">
+                </div>
+                <label>@Localizer["X"]</label>
+                <div class="form__field">
+                    <input asp-for="x" value="@Model.x" type="text">
+                </div>
+                <label>@Localizer["Y"]</label>
+                <div class="form__field">
+                    <input asp-for="y" value="@Model.y" type="text">
+                </div>
+            </div>
+            <div class="form__submit">
+                <button class="nice-button" type="submit">@Localizer["Done"]</button>
+            </div>
+        </form>
+    </div>
+</div>

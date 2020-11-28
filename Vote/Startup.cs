@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace Vote
 {
@@ -50,7 +51,7 @@ namespace Vote
                 {
                     new CultureInfo("ru"),
                     new CultureInfo("en"),
-                    new CultureInfo("by"),
+                    //new CultureInfo("by"),
                 };
                 options.DefaultRequestCulture = new RequestCulture("ru");
                 options.SupportedCultures = supportedCultures;
@@ -60,9 +61,7 @@ namespace Vote
             services.AddSignalR();
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                //string connection = "Host=ec2-54-217-213-79.eu-west-1.compute.amazonaws.com;Port=5432;Database=dchr8ii7h7l198;Username=hvaawqcheeowwj;Password=f64ebe3496848928d2a4f6aac92145464ab2603b8b6b0738e87eb5054a97768b";
-                string connection = "dbname = dchr8ii7h7l198 host = ec2 - 54 - 217 - 213 - 79.eu - west - 1.compute.amazonaws.com port = 5432 user = hvaawqcheeowwj password = f64ebe3496848928d2a4f6aac92145464ab2603b8b6b0738e87eb5054a97768b sslmode = require";
-                options.UseNpgsql(connection, assembly => assembly.MigrationsAssembly("Repositories"));
+                options.UseSqlServer(Configuration.GetConnectionString("ApplicationDbContextConnection"), assembly => assembly.MigrationsAssembly("Repositories"));
             });
             services.AddTransient<IVoteModelService, VoteModelService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -73,14 +72,13 @@ namespace Vote
             services.AddTransient<INotificationModelService, NotificationModelService>();
             services.AddTransient<ICompromisingEvidenceModelService, CompromisingEvidenceModelService>();
             services.AddTransient<ICompromisingEvidenceFileModelService, CompromisingEvidenceFileModelService>();
+            services.AddSingleton<IEmailSender, EmailService>();
 
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {
-                    IConfiguration googleAuthentication =
-                        Configuration.GetSection("Authentication:Google");
-                    options.ClientId     = googleAuthentication["ClientId"];
-                    options.ClientSecret = googleAuthentication["ClientSecret"];
+                    options.ClientId = Configuration["Project:GoogleClientId"];
+                    options.ClientSecret = Configuration["Project:GoogleClientSecret"];
                 });
 
             services.AddTransient<IViewRenderService, ViewRenderService>();
@@ -93,6 +91,7 @@ namespace Vote
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
+            //env.EnvironmentName = "Production";
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -141,7 +140,7 @@ namespace Vote
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             Task<IdentityResult> roleResult;
-            string email = "vladlykashonok@gmail.com";
+            string email = Configuration.GetSection("Project")["AdminEmail"];
 
             Task<bool> hasSuperAdminRole = roleManager.RoleExistsAsync(SuperAdmin);
             hasSuperAdminRole.Wait();
@@ -177,7 +176,7 @@ namespace Vote
                     UserName = email
                 };
 
-                Task<IdentityResult> newUser = userManager.CreateAsync(administrator, "147896325xXx.");
+                Task<IdentityResult> newUser = userManager.CreateAsync(administrator, Configuration.GetSection("Project")["AdminPassword"]);
                 newUser.Wait();
 
                 if (newUser.Result.Succeeded)

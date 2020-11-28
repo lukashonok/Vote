@@ -8,7 +8,7 @@ C:\Users\Vlad\source\repos\Vote\Services\bin\Debug\netcoreapp3.1\Repositories.pd
 C:\Users\Vlad\source\repos\Vote\Services\obj\Debug\netcoreapp3.1\Services.csprojAssemblyReference.cache
 C:\Users\Vlad\source\repos\Vote\Services\obj\Debug\netcoreapp3.1\Services.AssemblyInfoInputs.cache
 C:\Users\Vlad\source\repos\Vote\Services\obj\Debug\netcoreapp3.1\Services.AssemblyInfo.cs
-C:\Users\Vlad\source\repos\Vote\Services\obj\Debug\netcoreapp3.1\Services.csproj.CoreCompileInputs.cache
 C:\Users\Vlad\source\repos\Vote\Services\obj\Debug\netcoreapp3.1\Services.csproj.CopyComplete
 C:\Users\Vlad\source\repos\Vote\Services\obj\Debug\netcoreapp3.1\Services.dll
 C:\Users\Vlad\source\repos\Vote\Services\obj\Debug\netcoreapp3.1\Services.pdb
+C:\Users\Vlad\source\repos\Vote\Services\obj\Debug\netcoreapp3.1\Services.csproj.CoreCompileInputs.cache

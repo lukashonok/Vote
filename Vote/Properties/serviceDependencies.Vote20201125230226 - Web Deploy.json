@@ -7,7 +7,7 @@
       "secretStore": "AzureAppSettings"
     },
     "mssql1": {
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/voteserverdb/databases/Vote_db",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/votedbsrv/databases/Vote_db",
       "type": "mssql.azure",
       "connectionId": "ApplicationDbContextConnection",
       "secretStore": "AzureAppSettings"

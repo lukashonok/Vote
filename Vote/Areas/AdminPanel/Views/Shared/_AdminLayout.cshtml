@@ -17,6 +17,12 @@
                     <a class="layout-navbar__link layout-navbar__header" asp-area="" asp-controller="Vote" asp-action="Index">Vote</a>
                     <a class="layout-navbar__link" asp-area="AdminPanel" asp-controller="Admin" asp-action="Index">@Localizer["Process"]</a>
                     <a class="layout-navbar__link" asp-area="AdminPanel" asp-controller="Admin" asp-action="Users">@Localizer["Users"]</a>
+                    <a class="layout-navbar__link" asp-area="AdminPanel" asp-controller="Admin" asp-action="Places">
+                        @Localizer["Places"] <a asp-area="AdminPanel" asp-controller="Admin" asp-action="PlaceDetail">+</a>
+                    </a>
+                    <a class="layout-navbar__link" asp-area="AdminPanel" asp-controller="Admin" asp-action="Targets">
+                        @Localizer["Targets"] <a asp-area="AdminPanel" asp-controller="Admin" asp-action="TargetDetail">+</a>
+                    </a>
                 </div>
                 <div class="layout-navbar__section">
                     <partial name="_LoginPartial" />

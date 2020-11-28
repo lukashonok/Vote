@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Этот файл используется процессом публикации или упаковки вашего веб-проекта. Можно настроить поведение этого процесса,
+изменив этот файл MSBuild. Подробности см. на странице https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAOWGgHfuenEG9BT8FMmTaBwAAAAACAAAAAAAQZgAAAAEAACAAAAB/vs28Dx97KKkcZXoPGU1PZkLoA9SMCn+281tYChEx1QAAAAAOgAAAAAIAACAAAABXWz+zTA6Kq0Lxyq6ZxZgENw/rJ3G3FJFYVKDzbt0G4oAAAAD2CB3omJbAlHZI3Pf1MLTpPO4KcO5KqOABXDldOHARj0hik8Qgtdr6X2fz6VppfB8EWNibl9IYPRjZgp9QbUY2T7urKuIrpmeu1oBpBLwQ71mK8gfXOqQVPmglHWOmTuAhnq5Dh78NPT29/1TkHZlLauFD/dk/pJHM/9zsreuI0UAAAAAgutTEUc7OtzqhUe+LHCuYal0w/9A0P3NrdN9ZCMXVdiqRqxlVq4ARotC8guW7JDnti69fa3tGM0Vpr/OWrlSS</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="ApplicationDbContextConnection">
+      <Value>Data Source=tcp:votedbsrv.database.windows.net,1433%3bInitial Catalog=Vote_db%3bUser Id=vlad%40votedbsrv%3bPassword=ogurets1337.</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="Repositories.ApplicationDbContext">
+      <Value>Data Source=tcp:votedbsrv.database.windows.net,1433%3bInitial Catalog=Vote_db%3bUser Id=vlad%40votedbsrv%3bPassword=ogurets1337.</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

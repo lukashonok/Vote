@@ -21,6 +21,7 @@ using Services.VoteProcessModelService;
 using Vote.Forms;
 using Vote.ViewComponents;
 using Microsoft.Extensions.Localization;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Vote.Controllers
 {
@@ -74,6 +75,10 @@ namespace Vote.Controllers
         public async Task<ActionResult> PlaceDetail(int id)
         {
             VotePlaceModel place = _votePlaceModelService.GetVotePlaceModel(id);
+            //if (place == null)
+            //{
+            //    return RedirectToAction("Error", "Vote", new { text = $"There is no any place with id = {id}" });
+            //}
             var evidences_raw = (from E in _compromisingEvidenceModelService.GetCompromisingEvidenceModels()
                                  where E.VotePlaceId.Id == id
                                  select E).Include("UserId");
@@ -103,7 +108,7 @@ namespace Vote.Controllers
             var TotalVotes = (from V in _voteModelService.GetVoteModels()
                               where V.VotePlaceId.Id == id
                               select V.TargetId).Count();
-
+            
             ViewBag.TotalVotes = TotalVotes;
             ViewBag.TotalEvidences = evidences.Count();
             ViewBag.Region = place.Region;
@@ -202,8 +207,10 @@ namespace Vote.Controllers
         [HttpGet]
         public IActionResult GetPlaceInfoViewComponent(int id)
         {
-            var a = ViewComponent(typeof(PlaceInfoViewComponent), new { id, showDetail = true });
-            return a;
+            var pivc = ViewComponent(typeof(PlaceInfoViewComponent), new { id, showDetail = true });
+            //if (pivc == null)
+            //    return RedirectToAction("Error", "Vote", new { text = $"There is no any place with id = {id}" });
+            return pivc;
         }
 
         [HttpGet]
@@ -213,17 +220,54 @@ namespace Vote.Controllers
             //FROM Target LEFT JOIN  Vote ON Vote.Target = Target.Id 
             //GROUP BY Vote.Target, Target.Name;
             var votes = _voteModelService.GetVoteModels();
-            var voteStat_raw = (from T in _targetModelService.GetTargetModels()
+            var targets = _targetModelService.GetTargetModels();
+            var voteStat_raw = (from T in targets
                                 join V in votes on T.Id equals V.TargetId.Id
                                 group T by new { T.Name, T.Id } into total
                                 select new { total.Key.Name, Count = total.Count() });
             var totalVotes = votes.Count();
 
+
+            //SELECT Target.Name, COUNT(Target.Name) as "Total", VotePlace.Region
+            //FROM Target
+            //LEFT JOIN  Vote ON Vote.Target = Target.Id
+            //LEFT JOIN  VotePlace ON VotePlace.Id = Vote.VotePlace
+            //GROUP BY VotePlace.Region, Target.Name
+            var votePlaces = _votePlaceModelService.GetVotePlaceModels();
+            
+            var voteStatRegion_raw = (from T in targets
+                                join V in votes on T.Id equals V.TargetId.Id
+                                join VP in votePlaces on V.VotePlaceId.Id equals VP.Id
+                                group new { T, VP } by new { T.Name, VP.Region } into total
+                                select new { total.Key.Name, total.Key.Region, Total = total.Count() });
+            var voteStatRegion = voteStatRegion_raw.ToList();
+            var regions = (from VP in votePlaces
+                           group VP by new { VP.Id, VP.Region } into region
+                           select new { region.Key.Id, region.Key.Region }).Select(region => region.Region).ToList();
+            var targetsNames = (from T in targets
+                           group T by new { T.Id, T.Name } into target
+                           select new { target.Key.Id, target.Key.Name }).Select(target => target.Name).ToList();
+
             VoteStat voteStat = new VoteStat()
             {
                 VoteStats = new List<VotePropsForChart>(),
+                VoteStatsRegion = new VotePropsForChartRegion()
+                {
+                    regions = regions,
+                    targets = targetsNames
+                },
                 Total = totalVotes
             };
+
+            voteStat.VoteStatsRegion.regionStates = new Dictionary<string, Dictionary<string, int>>();
+            foreach (var region in regions)
+            {
+                voteStat.VoteStatsRegion.regionStates.Add(region, new Dictionary<string, int>());
+            }
+            foreach (var stat in voteStatRegion)
+            {
+                voteStat.VoteStatsRegion.regionStates[stat.Region].Add(stat.Name, stat.Total);
+            }
 
             var voteStat_pre = await voteStat_raw.ToListAsync();
             foreach (var vote in voteStat_pre)

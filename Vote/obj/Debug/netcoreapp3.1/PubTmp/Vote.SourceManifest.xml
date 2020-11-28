@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sitemanifest>
   <IisApp path="C:\Users\Vlad\source\repos\Vote\Vote\obj\Debug\netcoreapp3.1\PubTmp\Out\" />
+  <dbfullsql path="C:\Users\Vlad\source\repos\Vote\Vote\obj\Debug\netcoreapp3.1\PubTmp\EFSQLScripts\Repositories.ApplicationDbContext.sql" />
 </sitemanifest>

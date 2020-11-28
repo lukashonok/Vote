@@ -6,14 +6,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Repositories;
 using Services.CompromisingEvidenceFileModelService;
 using Services.CompromisingEvidenceModelService;
 using Services.TargetModelService;
+using Services.VotePlaceModelService;
 using Services.VoteProcessModelService;
 using Vote.Areas.AdminPanel.Forms;
 using Vote.Controllers;
-using Vote.Forms;
 using Vote.Services;
 
 namespace Vote.Areas.AdminPanel.Controllers
@@ -21,19 +20,25 @@ namespace Vote.Areas.AdminPanel.Controllers
     [Area("AdminPanel")]
     public class AdminController : Controller
     {
+        private readonly ITargetModelService _targetModelService;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IVotePlaceModelService _votePlaceModelService;
         private readonly IVoteProcessModelService _voteProcessModelService;
         private readonly INotificationModelService _notificationModelService;
         private readonly ICompromisingEvidenceModelService _compromisingEvidenceModelService;
         private readonly ICompromisingEvidenceFileModelService _compromisingEvidenceFileModelService;
         public AdminController(
+            ITargetModelService targetModelService,
             UserManager<ApplicationUser> userManager,
+            IVotePlaceModelService votePlaceModelService,
             IVoteProcessModelService voteProcessModelService,
             INotificationModelService notificationModelService,
             ICompromisingEvidenceModelService compromisingEvidenceModelService,
             ICompromisingEvidenceFileModelService compromisingEvidenceFileModelService)
         {
             _userManager = userManager;
+            _targetModelService = targetModelService;
+            _votePlaceModelService = votePlaceModelService;
             _voteProcessModelService = voteProcessModelService;
             _notificationModelService = notificationModelService;
             _compromisingEvidenceFileModelService = compromisingEvidenceFileModelService;
@@ -73,7 +78,7 @@ namespace Vote.Areas.AdminPanel.Controllers
 
                     _voteProcessModelService.UpdateVoteProcessModel(voteProcessModel);
 
-                    Notificator.VoteProcessChanged(_notificationModelService, _userManager);
+                    //Notificator.VoteProcessChanged(_notificationModelService, _userManager);
                 }
                 catch (DbUpdateException /* ex */)
                 {
@@ -138,7 +143,8 @@ namespace Vote.Areas.AdminPanel.Controllers
                     });
             }
             List<NotificationModel> notifications = await _notificationModelService.GetNotificationModels().Where(model => model.ApplicationGetterId.Id == user.Id).ToListAsync();
-            UserForm userForm = new UserForm() {
+            UserForm userForm = new UserForm()
+            {
                 User = user,
                 Evidences = evidences,
                 Notifications = notifications
@@ -183,6 +189,106 @@ namespace Vote.Areas.AdminPanel.Controllers
             await _userManager.RemoveFromRoleAsync(user, Role);
             var roles = await _userManager.GetRolesAsync(user);
             return RedirectToAction(nameof(Users));
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        public ActionResult Places()
+        {
+            var places = _votePlaceModelService.GetVotePlaceModels();
+            return View(places.ToList());
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        public ActionResult PlaceDetail(string id)
+        {
+            VotePlaceModel place = new VotePlaceModel() {
+                Id = 0, House = "", Region = "", Street = "", Town = "", x = 0, y = 0
+            };
+            if(id != null)
+            {
+                place = _votePlaceModelService.GetVotePlaceModel(int.Parse(id));
+            }
+            return View(place);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        public ActionResult PlaceDelete(int id)
+        {
+            _votePlaceModelService.DeleteVotePlaceModel(id);
+            return RedirectToAction(nameof(Places));
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        public ActionResult PlaceDetail(VotePlaceModel place)
+        {
+            if (ModelState.IsValid)
+            {
+                if (place.Id != 0)
+                {
+                    _votePlaceModelService.UpdateVotePlaceModel(place);
+                    return RedirectToAction(nameof(PlaceDetail), new { id = place.Id.ToString() });
+                }
+                else
+                {
+                    _votePlaceModelService.InsertVotePlaceModel(place);
+                    return RedirectToAction(nameof(Places));
+                }
+            } else
+            {
+                return RedirectToAction(nameof(PlaceDetail), new { id = place.Id.ToString() });
+            }
+        }
+
+
+        [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        public ActionResult Targets()
+        {
+            var targets = _targetModelService.GetTargetModels();
+            return View(targets.ToList());
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        public ActionResult TargetDetail(string id)
+        {
+            var target = _targetModelService.GetTargetModel(int.Parse(id));
+            return View(target);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        public ActionResult TargetDelete(int id)
+        {
+            _targetModelService.DeleteTargetModel(id);
+            return RedirectToAction(nameof(Targets));
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        public ActionResult TargetDetail(TargetModel target)
+        {
+            if (ModelState.IsValid)
+            {
+                if (target.Id != 0)
+                {
+                    _targetModelService.UpdateTargetModel(target);
+                    return RedirectToAction(nameof(Targets), new { id = target.Id.ToString() });
+                }
+                else
+                {
+                    _targetModelService.InsertTargetModel(target);
+                    return RedirectToAction(nameof(Targets));
+                }
+            }
+            else
+            {
+                return RedirectToAction(nameof(TargetDetail), new { id = target.Id.ToString() });
+            }
         }
     }
 }

@@ -1,0 +1,26 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+@model Entities.TargetModel
+<link rel="stylesheet" href="~/css/ordinaryForm.css">
+<link href="~/css/site.css" rel="stylesheet" />
+<div class="form__container">
+    <div class="form">
+        <div class="form__title">@Localizer["form"]</div>
+        <form asp-area="AdminPanel" asp-controller="Admin" asp-action="TargetDetail" method="post">
+            <div asp-validation-summary="All"></div>
+            <input asp-for="Id" value="@Model.Id" type="hidden">
+            <div class="form__fields">
+                <label>@Localizer["Name"]</label>
+                <div class="form__field">
+                    <input asp-for="Name" value="@Model.Name" type="text">
+                </div>
+                <label>@Localizer["Description"]</label>
+                <div class="form__field">
+                    <input asp-for="Description" value="@Model.Description" type="text">
+                </div>
+            </div>
+            <div class="form__submit">
+                <button class="nice-button" type="submit">@Localizer["Done"]</button>
+            </div>
+        </form>
+    </div>
+</div>

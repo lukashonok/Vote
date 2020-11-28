@@ -1,0 +1,20 @@
+2020-11-26 22:07:33.9261 Info Message Template Auto Format enabled
+2020-11-26 22:07:33.9416 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-26 22:07:34.0071 Info Adding target FileTarget(Name=allfile)
+2020-11-26 22:07:34.0157 Info Adding target FileTarget(Name=ownFile-web)
+2020-11-26 22:07:34.0591 Info Validating config: TargetNames=allfile, ownFile-web, ConfigItems=45, FilePath=C:\Users\Vlad\source\repos\Vote\Vote\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-26 22:11:55.4171 Info Message Template Auto Format enabled
+2020-11-26 22:11:55.4342 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-26 22:11:55.5077 Info Adding target FileTarget(Name=allfile)
+2020-11-26 22:11:55.5152 Info Adding target FileTarget(Name=ownFile-web)
+2020-11-26 22:11:55.5562 Info Validating config: TargetNames=allfile, ownFile-web, ConfigItems=45, FilePath=C:\Users\Vlad\source\repos\Vote\Vote\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-26 22:15:07.0231 Info Message Template Auto Format enabled
+2020-11-26 22:15:07.0363 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-26 22:15:07.0926 Info Adding target FileTarget(Name=allfile)
+2020-11-26 22:15:07.0926 Info Adding target FileTarget(Name=ownFile-web)
+2020-11-26 22:15:07.1391 Info Validating config: TargetNames=allfile, ownFile-web, ConfigItems=45, FilePath=C:\Users\Vlad\source\repos\Vote\Vote\bin\Debug\netcoreapp3.1\nlog.config
+2020-11-26 22:15:55.4236 Info Message Template Auto Format enabled
+2020-11-26 22:15:55.4379 Info Loading assembly: NLog.Web.AspNetCore
+2020-11-26 22:15:55.5138 Info Adding target FileTarget(Name=allfile)
+2020-11-26 22:15:55.5138 Info Adding target FileTarget(Name=ownFile-web)
+2020-11-26 22:15:55.5591 Info Validating config: TargetNames=allfile, ownFile-web, ConfigItems=45, FilePath=C:\Users\Vlad\source\repos\Vote\Vote\bin\Debug\netcoreapp3.1\nlog.config

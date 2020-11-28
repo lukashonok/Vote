@@ -60,6 +60,11 @@ namespace Vote.Controllers
             _votePlaceModelService = votePlaceModelService;
             _voteProcessModelService = voteProcessModelService;
         }
+        public ActionResult Index2()
+        {
+            return View();
+        }
+
         [AllowAnonymous]
         public async Task<ActionResult> Index()
         {
@@ -84,6 +89,7 @@ namespace Vote.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Index(VoteForm voteForm)
         {
+
             if (_phoneNumberModelService.GetPhoneNumberModels().Where(phone => phone.PhoneNumber == voteForm.PhoneNumber).ToList().Count != 0)
             {
                 ModelState.AddModelError("Телефонный номер", "Голос с использованием такого номера уже есть!");
@@ -104,7 +110,8 @@ namespace Vote.Controllers
                 {
                     ApplicationUser user = await _userManager.GetUserAsync(User);
                     phoneNumber = new PhoneNumberModel() { PhoneNumber = user.PhoneNumber };
-                } else
+                }
+                else
                 {
                     phoneNumber = new PhoneNumberModel() { PhoneNumber = voteForm.PhoneNumber };
                 }
@@ -121,7 +128,9 @@ namespace Vote.Controllers
                 _logger.LogInformation($"{voteForm.PhoneNumber} voted");
                 await _hubContext.Clients.All.SendAsync("Stat", "update");
                 return RedirectToAction(nameof(VoteSuccess));
-            } else {
+            }
+            else
+            {
                 return await Index();
             }
         }
@@ -138,8 +147,9 @@ namespace Vote.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(String text = "")
         {
+            ViewBag.text = text;
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 

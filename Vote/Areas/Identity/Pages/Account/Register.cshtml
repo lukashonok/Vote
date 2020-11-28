@@ -1,6 +1,6 @@
 ﻿@page
 @model RegisterModel
-@{
+@*@{
     ViewData["Title"] = "Register";
 }
 
@@ -59,6 +59,68 @@
                 }
             }
         </section>
+    </div>
+</div>*@
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+
+<link rel="stylesheet" href="~/css/ordinaryForm.css">
+<link href="~/css/site.css" rel="stylesheet" />
+<link href="~/css/layout.css" rel="stylesheet" />
+<div class="form__container">
+    <div class="form">
+        <div class="form__title">@Localizer["Register"]</div>
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form__fields">
+                <span class="form__error" asp-validation-for="Input.Email"></span>
+                <label>@Localizer["Email"]</label>
+                <div class="form__field">
+                    <input asp-for="Input.Email" class="form-control" placeholder="@Localizer["Email"]" />
+                </div>
+
+                <label>@Localizer["Password"]</label>
+                <div class="form__field">
+                    <input asp-for="Input.Password" class="form-control" placeholder="@Localizer["Password"]" />
+                </div>
+
+                <label>@Localizer["Repeat Password"]</label>
+                <div class="form__field">
+                    <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="@Localizer["Repeat Password"]" />
+                </div>
+            </div>
+            <div class="form__submit">
+                <button class="nice-button" type="submit">@Localizer["Registrate"]</button>
+            </div>
+        </form>
+        <div class="form__additional">
+            <p>
+                <a id="forgot-password" class="layout-navbar__link"  style="padding-left: 0" asp-page="./ForgotPassword">@Localizer["Forgot your password?"]</a>
+            </p>
+            <p>
+                <a asp-page="./Register" class="layout-navbar__link"  style="padding-left: 0" asp-route-returnUrl="@Model.ReturnUrl">@Localizer["Register as a new user"]</a>
+            </p>
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins)
+                                {
+                                    <button type="submit" class="nice-button" name="provider" value="@provider.Name" title="@Localizer["Log in using"] @provider.DisplayName">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </div>
     </div>
 </div>
 

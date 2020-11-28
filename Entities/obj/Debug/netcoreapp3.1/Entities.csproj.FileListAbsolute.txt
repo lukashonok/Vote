@@ -3,7 +3,7 @@ C:\Users\Vlad\source\repos\Vote\Entities\bin\Debug\netcoreapp3.1\Entities.dll
 C:\Users\Vlad\source\repos\Vote\Entities\bin\Debug\netcoreapp3.1\Entities.pdb
 C:\Users\Vlad\source\repos\Vote\Entities\obj\Debug\netcoreapp3.1\Entities.AssemblyInfoInputs.cache
 C:\Users\Vlad\source\repos\Vote\Entities\obj\Debug\netcoreapp3.1\Entities.AssemblyInfo.cs
-C:\Users\Vlad\source\repos\Vote\Entities\obj\Debug\netcoreapp3.1\Entities.csproj.CoreCompileInputs.cache
 C:\Users\Vlad\source\repos\Vote\Entities\obj\Debug\netcoreapp3.1\Entities.dll
 C:\Users\Vlad\source\repos\Vote\Entities\obj\Debug\netcoreapp3.1\Entities.pdb
 C:\Users\Vlad\source\repos\Vote\Entities\obj\Debug\netcoreapp3.1\Entities.csprojAssemblyReference.cache
+C:\Users\Vlad\source\repos\Vote\Entities\obj\Debug\netcoreapp3.1\Entities.csproj.CoreCompileInputs.cache

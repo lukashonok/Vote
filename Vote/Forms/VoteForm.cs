@@ -25,6 +25,7 @@ namespace Vote.Forms
     {
         public int Total { get; set; }
         public List<VotePropsForChart> VoteStats { get; set; }
+        public VotePropsForChartRegion VoteStatsRegion { get; set; }
     }
 
     public class VotePropsForChart
@@ -33,4 +34,12 @@ namespace Vote.Forms
         public int v { get; set; }
         public string f { get; set; }
     }
+
+    public class VotePropsForChartRegion
+    {
+        public List<string> targets { get; set; }
+        public List<string> regions { get; set; }
+        public Dictionary<string, Dictionary<string, int>> regionStates { get; set; }
+    }
+
 }

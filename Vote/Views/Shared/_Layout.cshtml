@@ -19,7 +19,10 @@
                     <a class="layout-navbar__link" asp-area="" asp-controller="Map" asp-action="Index">@Localizer["Map"]</a>
                     <a class="layout-navbar__link" asp-area="" asp-controller="Map" asp-action="VotePlaces">@Localizer["Search"]</a>
                     <a class="layout-navbar__link" asp-area="" asp-controller="Vote" asp-action="Privacy">@Localizer["Conf"]</a>
-                    <a class="layout-navbar__link" href="@Url.Action("Index", "Account")">@Localizer["Acc"]</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="layout-navbar__link" href="@Url.Action("Index", "Account")">@Localizer["Acc"]</a>
+                    }
                     @if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("SuperAdmin"))
                     {
                         <a class="layout-navbar__link" asp-area="AdminPanel" asp-controller="Admin" asp-action="Index">@Localizer["Panel"]</a>
