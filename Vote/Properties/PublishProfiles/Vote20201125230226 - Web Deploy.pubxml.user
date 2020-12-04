@@ -10,12 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="ApplicationDbContextConnection">
-      <Value>Data Source=tcp:votedbsrv.database.windows.net,1433%3bInitial Catalog=Vote_db%3bUser Id=vlad%40votedbsrv%3bPassword=ogurets1337.</Value>
+      <Value>Data Source=tcp:votedbsrv.database.windows.net,1433%3bInitial Catalog=Vote_db%3bUser Id=vlad%40votedbsrv%3bPassword=ogurets1337.%3bForeign Keys=False</Value>
     </DestinationConnectionStrings>
-  </ItemGroup>
-  <ItemGroup>
-    <EFMigrations Include="Repositories.ApplicationDbContext">
-      <Value>Data Source=tcp:votedbsrv.database.windows.net,1433%3bInitial Catalog=Vote_db%3bUser Id=vlad%40votedbsrv%3bPassword=ogurets1337.</Value>
-    </EFMigrations>
   </ItemGroup>
 </Project>

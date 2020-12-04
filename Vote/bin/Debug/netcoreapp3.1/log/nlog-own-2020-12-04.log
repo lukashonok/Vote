@@ -1,0 +1,33 @@
+2020-12-04 10:39:07.5971||ERROR|Vote.Program|Stopped program because of exception System.FormatException: Could not parse the JSON file.
+ ---> System.Text.Json.JsonReaderException: '"' is invalid after a value. Expected either ',', '}', or ']'. LineNumber: 14 | BytePositionInLine: 2.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenUntilAfterAllCommentsAreSkipped(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextToken(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenOrRollback(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, Utf8JsonReader reader, MetadataDb& database, StackRowStack& stack)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedBytes)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationFileParser.ParseStream(Stream input)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.HandleException(ExceptionDispatchInfo info)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load()
+   at Microsoft.Extensions.Configuration.ConfigurationRoot..ctor(IList`1 providers)
+   at Microsoft.Extensions.Configuration.ConfigurationBuilder.Build()
+   at Microsoft.Extensions.Hosting.HostBuilder.BuildAppConfiguration()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at Vote.Program.Main(String[] args) in C:\Users\Vlad\source\repos\Vote\Vote\Program.cs:line 22|url: |action: 
+2020-12-04 10:39:43.6649||INFO|Vote.Areas.Identity.Pages.Account.LoginModel|User logged in. |url: |action: 
+2020-12-04 10:40:34.5693||INFO|Vote.Areas.Identity.Pages.Account.LogoutModel|User logged out. |url: |action: 
+2020-12-04 10:40:37.2850||INFO|Vote.Areas.Identity.Pages.Account.LoginModel|User logged in. |url: |action: 
+2020-12-04 10:40:43.1177||INFO|Vote.Areas.Identity.Pages.Account.LogoutModel|User logged out. |url: |action: 
+2020-12-04 10:40:56.0844||INFO|Vote.Areas.Identity.Pages.Account.ExternalLoginModel|User created an account using Google provider. |url: |action: 
+2020-12-04 13:47:59.5647||INFO|Vote.Areas.Identity.Pages.Account.LogoutModel|User logged out. |url: |action: 
+2020-12-04 13:48:54.1023||INFO|Vote.Areas.Identity.Pages.Account.LoginModel|User logged in. |url: |action: 

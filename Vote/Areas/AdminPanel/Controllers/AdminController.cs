@@ -78,7 +78,7 @@ namespace Vote.Areas.AdminPanel.Controllers
 
                     _voteProcessModelService.UpdateVoteProcessModel(voteProcessModel);
 
-                    //Notificator.VoteProcessChanged(_notificationModelService, _userManager);
+                    Notificator.VoteProcessChanged(_notificationModelService, _userManager);
                 }
                 catch (DbUpdateException /* ex */)
                 {
@@ -169,8 +169,33 @@ namespace Vote.Areas.AdminPanel.Controllers
         public async Task<ActionResult> UserDelete(string Id)
         {
             var user = await _userManager.FindByIdAsync(Id);
+            var evidences = _compromisingEvidenceModelService.GetCompromisingEvidenceModels();
+            var evidences_files = _compromisingEvidenceFileModelService.GetCompromisingEvidenceFileModels();
+            IList<NotificationModel> notifications = (from N in _notificationModelService.GetNotificationModels()
+                                where N.ApplicationGetterId == user
+                                select N).ToList();
+            IList<CompromisingEvidenceModel> user_evidences = (
+                                 from E in evidences
+                                 where E.UserId == user
+                                 select E).ToList();
+            foreach (var evidence in user_evidences)
+            {
+                IList<CompromisingEvidenceFileModel> files =
+                            (from F in evidences_files
+                             where F.CompromisingEvidenceId == evidence
+                             select F).ToList();
+                foreach (var file in files)
+                {
+                    _compromisingEvidenceFileModelService.DeleteCompromisingEvidenceFileModel(file.Id);
+                }
+                _compromisingEvidenceModelService.DeleteCompromisingEvidenceModel(evidence.Id);
+            }
+            foreach (var notification in notifications)
+            {
+                _notificationModelService.DeleteNotificationModel(notification.Id);
+            }
             await _userManager.DeleteAsync(user);
-            return await Users();
+            return RedirectToAction(nameof(Users));
         }
 
         [Authorize(Roles = "SuperAdmin,Admin")]

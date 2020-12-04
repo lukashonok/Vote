@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.SignalR;
 using Vote.Hubs;
 using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace Vote.Controllers
 {
@@ -59,10 +60,6 @@ namespace Vote.Controllers
             _phoneNumberModelService = phoneNumberModelService;
             _votePlaceModelService = votePlaceModelService;
             _voteProcessModelService = voteProcessModelService;
-        }
-        public ActionResult Index2()
-        {
-            return View();
         }
 
         [AllowAnonymous]

@@ -31,7 +31,8 @@ namespace Vote.Services
         }
         static public void VoteProcessChanged(INotificationModelService notificationModelService, UserManager<ApplicationUser> userManager)
         {
-            foreach (var user in userManager.Users)
+            IList<ApplicationUser> users = userManager.Users.ToList();
+            foreach (var user in users)
             {
                 notificationModelService.InsertNotificationModel(new NotificationModel
                 {

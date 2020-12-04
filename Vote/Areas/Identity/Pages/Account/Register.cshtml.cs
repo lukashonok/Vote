@@ -29,12 +29,13 @@ namespace Vote.Areas.Identity.Pages.Account
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
+            IEmailSender emailSender,
             ILogger<RegisterModel> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = new EmailService();
+            _emailSender = emailSender;
         }
 
         [BindProperty]

@@ -22,7 +22,6 @@
 <script type="text/javascript">
     let search = document.getElementById("search");
     search.onchange = (e) => {
-        console.log("e", e);
         $.ajax({
             type: 'GET',
             url: '@Url.Action("GetVotePlaces", "Map")',
@@ -36,7 +35,7 @@
                 while (container.lastElementChild) {
                     container.removeChild(container.lastElementChild);
                 }
-                counter.innerHTML = PlacesSearch.length ? PlacesSearch.length : 0 + " всего";
+                document.getElementById("counter").innerHTML = PlacesSearch.total + " " + "@Localizer["Total"]";
                 for (let placeId of PlacesSearch.placesId) {
                     let newDiv = document.createElement("div");
                     $.ajax({

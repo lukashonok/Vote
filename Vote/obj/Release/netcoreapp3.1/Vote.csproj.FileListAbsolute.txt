@@ -288,3 +288,8 @@ C:\Users\Vlad\source\repos\Vote\Vote\obj\Release\netcoreapp3.1\Vote.Resources.Ar
 C:\Users\Vlad\source\repos\Vote\Vote\obj\Release\netcoreapp3.1\Vote.Resources.Areas.Identity.Pages.Account.Register.en.resources
 C:\Users\Vlad\source\repos\Vote\Vote\obj\Release\netcoreapp3.1\Vote.Resources.Areas.Identity.Pages.Account.Register.ru.resources
 C:\Users\Vlad\source\repos\Vote\Vote\obj\Release\netcoreapp3.1\Razor\Views\Vote\Error.cshtml.g.cs
+C:\Users\Vlad\source\repos\Vote\Vote\bin\Release\netcoreapp3.1\appsettings.Production.json
+C:\Users\Vlad\source\repos\Vote\Vote\obj\Release\netcoreapp3.1\Razor\Areas\AdminPanel\Views\Admin\PlaceDetail.cshtml.g.cs
+C:\Users\Vlad\source\repos\Vote\Vote\obj\Release\netcoreapp3.1\Razor\Areas\AdminPanel\Views\Admin\Places.cshtml.g.cs
+C:\Users\Vlad\source\repos\Vote\Vote\obj\Release\netcoreapp3.1\Razor\Areas\AdminPanel\Views\Admin\TargetDetail.cshtml.g.cs
+C:\Users\Vlad\source\repos\Vote\Vote\obj\Release\netcoreapp3.1\Razor\Areas\AdminPanel\Views\Admin\Targets.cshtml.g.cs

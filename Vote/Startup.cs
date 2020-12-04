@@ -61,7 +61,12 @@ namespace Vote
             services.AddSignalR();
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("ApplicationDbContextConnection"), assembly => assembly.MigrationsAssembly("Repositories"));
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("ApplicationDbContextConnection"),
+                    assembly => {
+                        assembly.MigrationsAssembly("Repositories");
+                    }
+                );
             });
             services.AddTransient<IVoteModelService, VoteModelService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -91,17 +96,17 @@ namespace Vote
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
-            //env.EnvironmentName = "Production";
-            if (env.IsDevelopment())
-            {
+            env.EnvironmentName = "Production";
+            //if (env.IsDevelopment())
+            //{
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Vote/Error");
-                app.UseHsts();
-            }
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler("/Vote/Error");
+            //    app.UseHsts();
+            //}
 
             Configuration.Bind("Project", new Config());
 

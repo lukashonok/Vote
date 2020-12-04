@@ -1,35 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
-using MimeKit;
-using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Configuration;
 
 namespace Vote.Services
 {
     public class EmailService : IEmailSender
     {
+        private readonly IConfiguration _configuration;
+        public EmailService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         public async Task SendEmailAsync(string email, string subject, string message)
         {
-            var emailMessage = new MimeMessage();
-
-            emailMessage.From.Add(new MailboxAddress("Почти платформа Голос", "aspvote@gmail.com"));
-            emailMessage.To.Add(new MailboxAddress(email, email));
-            emailMessage.Subject = subject;
-            emailMessage.Body = new BodyBuilder()
+            using var emailMessage = new MailMessage
             {
-                HtmlBody = $"<div style=\"color: purple;\">{message}</div>",
-            }.ToMessageBody();
+                From = (new MailAddress(_configuration["EmailSender:Email"], "Asp Vote")),
+                Body = $"<div style=\"color: purple;\">{message}</div>",
+                Subject = subject,
+                IsBodyHtml = true
+            };
+            emailMessage.To.Add(new MailAddress(email, email));
 
-            using var client = new SmtpClient();
-            await client.ConnectAsync("smtp.gmail.com", 25, false);
-
-            await client.AuthenticateAsync("aspvote@gmail.com", "147896325xXx");
-
-            await client.SendAsync(emailMessage);
-
-            await client.DisconnectAsync(true);
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+            smtp.Port = 587;
+            smtp.Host = "smtp.gmail.com";
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = new System.Net.NetworkCredential(_configuration["EmailSender:Email"], _configuration["EmailSender:Password"]);
+            smtp.EnableSsl = true;
+            smtp.Send(emailMessage);
         }
     }
 }

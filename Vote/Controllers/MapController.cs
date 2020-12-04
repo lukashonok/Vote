@@ -262,7 +262,7 @@ namespace Vote.Controllers
             voteStat.VoteStatsRegion.regionStates = new Dictionary<string, Dictionary<string, int>>();
             foreach (var region in regions)
             {
-                voteStat.VoteStatsRegion.regionStates.Add(region, new Dictionary<string, int>());
+                voteStat.VoteStatsRegion.regionStates.TryAdd(region, new Dictionary<string, int>());
             }
             foreach (var stat in voteStatRegion)
             {
