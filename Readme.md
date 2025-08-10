@@ -1,1 +1,1 @@
-### https://vote20201125230226.azurewebsites.net/
+Vote platform, Pet project C# ASP.NET CORE working on AWS
